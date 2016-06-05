@@ -18,7 +18,10 @@
     {{/if}}
   </div>
   <div class="field {{if (and showInvalid validations.attrs.apiKey.isinValid) 'error' ''}}">
-    <label>API key {{if apiKey '' '(see http://exercism.io/account/key)'}}</label>
+    <label>API key</label>
+    {{#if (not apiKey)}}
+      (see <a href="http://exercism.io/account/key">http://exercism.io/account/key</a>)
+    {{/if}}
     <input
       type="text"
       value={{apiKey}}

@@ -12,9 +12,20 @@ export default Ember.Service.extend({
     this.update(config);
   },
 
+  getDefaults() {
+      return {
+        api: 'http://exercism.io',
+        xapi: 'http://x.exercism.io',
+        apiKey: null,
+        dir: path.join(osHomedir(), 'exercism')
+    };
+  },
+
   update(config) {
-    this.set('api', config.api ? config.api : 'http://exercism.io');
-    this.set('xapi', config.xapi ? config.xapi : 'http://x.exercism.io');
+    let defaults = this.getDefaults();
+    this.set('api', config.api ? config.api : defaults.api);
+    this.set('xapi', config.xapi ? config.xapi : defaults.xapi);
+    this.set('dir', config.dir ? config.dir : defaults.dir);
   },
 
   fileExists(filePath) {
@@ -45,7 +56,7 @@ export default Ember.Service.extend({
   readConfigFile() {
     let configFilePath = this.getConfigFilePath();
     if (!this.fileExists(configFilePath)) {
-      return { api: null, xapi: null, apiKey: null, dir: null };
+      return this.getDefaults();
     }
     return jsonfile.readFileSync(configFilePath);
   }

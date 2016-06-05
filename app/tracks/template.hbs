@@ -1,5 +1,11 @@
-{{#each model.tracks as |track|}}
-  <div>{{track.language}}</div>
-{{/each}}
+{{#power-select
+  options=model
+  selected=selectedTrack
+  onchange=(action "showTrack") as |track|}}
+  {{track.id}}
+{{/power-select}}
 
+<div class="ui segment">
 {{outlet}}
+</div>
+

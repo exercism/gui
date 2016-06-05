@@ -10,5 +10,12 @@ export default Ember.Service.extend({
         uri = `${xapi}/tracks`,
         options = { uri, json: true };
     return rp(options);
+  },
+
+  getTrack(trackId) {
+    let xapi = this.get('configuration.xapi'),
+        uri = `${xapi}/tracks/${trackId}`,
+        options = { uri, json: true };
+    return rp(options);
   }
 });

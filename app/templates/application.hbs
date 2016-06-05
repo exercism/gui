@@ -1,4 +1,33 @@
-<h2 id="title">Welcome to exercism GUI</h2>
+<div class="ui inverted top fixed menu">
+    {{#link-to "index" class="item"}}
+      <img src="assets/images/e_red_small.png">
+    {{/link-to}}
+    {{link-to "Configuration" "configuration" class="item"}}
+    {{link-to "Tracks" "tracks" class="item"}}
+</div>
 
-{{link-to "Tracks" "tracks"}}
-{{outlet}}
+<div class="ui main container">
+  {{#each flashMessages.queue as |flash|}}
+    {{#flash-message flash=flash as |component flash|}}
+      {{#if flash.componentName}}
+        {{component flash.componentName content=flash.content}}
+      {{else}}
+        <div class="ui {{flash.type}} floating message">
+          <div class="header">
+            {{flash.message}}
+          </div>
+        </div>
+      {{/if}}
+    {{/flash-message}}
+  {{/each}}
+  <br>
+  {{outlet}}
+</div>
+
+<div class="ui bottom fixed menu">
+  <div class="right menu">
+    <div class="item">
+      <img src="assets/images/logo.png" class="ui small image">
+    </div>
+  </div>
+</div>

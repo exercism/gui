@@ -1,0 +1,62 @@
+<div class="ui info message">
+  <div class="header">Using configuration path {{configFilePath}}</div>
+</div>
+
+<form class="ui form {{if (and showInvalid validations.isInvalid) 'error' ''}}">
+  <h4 class="ui dividing header">User Information</h4>
+  <div class="field {{if (and showInvalid validations.attrs.dir.isinValid) 'error' ''}}">
+    <label>Exercises directory</label>
+    <input
+      type="text"
+      value={{dir}}
+      placeholder="Exercises directory"
+      oninput={{action (mut dir) value="target.value"}}>
+    {{#if (and showInvalid validations.attrs.dir.message)}}
+      <div class="ui error message">
+        <p>{{validations.attrs.dir.messages}}</p>
+      </div>
+    {{/if}}
+  </div>
+  <div class="field {{if (and showInvalid validations.attrs.apiKey.isinValid) 'error' ''}}">
+    <label>API key {{if apiKey '' '(see http://exercism.io/account/key)'}}</label>
+    <input
+      type="text"
+      value={{apiKey}}
+      placeholder="API key"
+      oninput={{action (mut apiKey) value="target.value"}}>
+    {{#if (and showInvalid validations.attrs.apiKey.message)}}
+      <div class="ui error message">
+        <p>{{validations.attrs.apiKey.messages}}</p>
+      </div>
+    {{/if}}
+  </div>
+
+  <h4 class="ui dividing header">API URLs</h4>
+  <div class="field {{if (and showInvalid validations.attrs.api.isinValid) 'error' ''}}">
+    <label>Exercism API</label>
+    <input
+      type="text"
+      value={{api}}
+      placeholder="Exercism API"
+      oninput={{action (mut api) value="target.value"}}>
+    {{#if (and showInvalid validations.attrs.api.message)}}
+      <div class="ui error message">
+        <p>{{validations.attrs.api.messages}}</p>
+      </div>
+    {{/if}}
+  </div>
+  <div class="field {{if (and showInvalid validations.attrs.apiKey.isinValid) 'error' ''}}">
+    <label>Exercises API</label>
+    <input
+      type="text"
+      value={{xapi}}
+      placeholder="Exercises API"
+      oninput={{action (mut xapi) value="target.value"}}>
+    {{#if (and showInvalid validations.attrs.xapi.message)}}
+      <div class="ui error message">
+        <p>{{validations.attrs.xapi.messages}}</p>
+      </div>
+    {{/if}}
+  </div>
+  <button class="ui blue button" {{action "saveConfig"}}>Save</button>
+</form>

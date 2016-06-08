@@ -6,6 +6,7 @@ const path                 = require('path');
 const {app, BrowserWindow} = electron;
 const dirname              = __dirname || path.resolve(path.dirname());
 const emberAppLocation     = `file://${dirname}/dist/index.html`;
+const shell                = require('electron').shell;
 
 let mainWindow = null;
 
@@ -27,8 +28,8 @@ app.on('window-all-closed', function onWindowAllClosed() {
 
 app.on('ready', function onReady() {
     mainWindow = new BrowserWindow({
-        width: 800,
-        height: 600
+        width: 1024,
+        height: 720
     });
 
     delete mainWindow.module;
@@ -87,4 +88,17 @@ app.on('ready', function onReady() {
         console.log('This is a serious issue that needs to be handled and/or debugged.');
         console.log(`Exception: ${err}`);
     });
+
+    // Open external links in default browser
+    let handleRedirect = (e, url) => {
+      if(url !== mainWindow.webContents.getURL()) {
+        e.preventDefault();
+        shell.openExternal(url);
+      }
+    };
+
+    mainWindow.webContents.on('will-navigate', handleRedirect);
+    mainWindow.webContents.on('new-window', handleRedirect);
+
+
 });

@@ -1,3 +1,16 @@
-{{model.language}}
-{{model.problems}}
-{{outlet}}
+<div class="ui items">
+  <div class="item">
+    <a class="ui tiny image">
+      <img src="{{model.imageSrc}}" onerror="this.src='assets/images/e_red_small.png';">
+    </a>
+    <div class="content">
+      <a class="header">{{model.language}}</a>
+      <div class="description">
+        <p>Track details <a href="{{model.languageUrl}}">{{model.languageUrl}}</a></p>
+      </div>
+      <div class="extra">
+        Repository <a href="{{model.repository}}">{{model.repository}}</a>
+      </div>
+    </div>
+  </div>
+</div>

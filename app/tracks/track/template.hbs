@@ -1,16 +1,50 @@
-<div class="ui items">
-  <div class="item">
-    <a class="ui tiny image">
-      <img src="{{model.imageSrc}}" onerror="this.src='assets/images/e_red_small.png';">
-    </a>
-    <div class="content">
-      <a class="header">{{model.language}}</a>
-      <div class="description">
-        <p>Track details <a href="{{model.languageUrl}}">{{model.languageUrl}}</a></p>
+<div class="ui two column centered padded grid">
+  <div class="row">
+    <div class="twelve wide column">
+      {{#with model as |track|}}
+      <div class="ui items">
+        <div class="item">
+          <a class="ui tiny image">
+            <img src="{{track.imageSrc}}" onerror="this.src='assets/images/e_red_small.png';">
+          </a>
+          <div class="content">
+            <a class="header">{{track.language}} track</a>
+            <div class="extra">
+              <p>Track details <a href="{{track.languageUrl}}">{{track.languageUrl}}</a></p>
+            </div>
+            <div class="extra">
+              Repository <a href="{{track.repository}}">{{track.repository}}</a>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="extra">
-        Repository <a href="{{model.repository}}">{{model.repository}}</a>
+      {{/with}}
+    </div>
+    <div class="four wide column">
+      <div class="ui fluid vertical menu">
+        <div class="header item">Actions</div>
+        {{#if apiKeyUnset}}
+          {{#link-to "configuration" class="item"}}
+            <p>Please configure your API key to enable these actions</p>
+          {{/link-to}}
+        {{/if}}
+        {{#if apiKeyUnset}}
+        <div class="item">
+          <div class="ui disabled fluid button">Fetch</div>
+        </div>
+        <div class="item">
+          <div class="ui disabled fluid button">Show status</div>
+        </div>
+        {{else}}
+        <div class="item">
+          <div class="ui fluid button">Fetch</div>
+        </div>
+        <div class="item">
+          {{link-to "Show status" "tracks.track.status" model.id class="ui fluid button"}}
+        </div>
+        {{/if}}
       </div>
     </div>
   </div>
 </div>
+{{outlet}}

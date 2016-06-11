@@ -1,9 +1,11 @@
-<div class="ui info message">
-  <div class="header">Using configuration path {{configFilePath}}</div>
+<div class="ui icon yellow message">
+  <i class="file text icon"></i>
+  <div class="content">
+    <div class="header">Using configuration path {{configFilePath}}</div>
+  </div>
 </div>
 
 <form class="ui form {{if (and showInvalid validations.isInvalid) 'error' ''}}">
-  <h4 class="ui dividing header">User Information</h4>
   <div class="field {{if (and showInvalid validations.attrs.dir.isinValid) 'error' ''}}">
     <label>Exercises directory</label>
     <input
@@ -34,7 +36,14 @@
     {{/if}}
   </div>
 
-  <h4 class="ui dividing header">API URLs</h4>
+  <div class="field">
+    <button class="ui small basic black button" {{action (toggle "showingAdvanced" this)}}>
+      <i class="{{if showingAdvanced 'up' 'down'}} arrow icon"></i>
+      Advanced
+    </button>
+  </div>
+
+  {{#if showingAdvanced}}
   <div class="field {{if (and showInvalid validations.attrs.api.isinValid) 'error' ''}}">
     <label>Exercism API</label>
     <input
@@ -61,5 +70,9 @@
       </div>
     {{/if}}
   </div>
+  {{/if}}
+  <div class="ui divider"></div>
+  <div class="field">
   <button class="ui blue button" {{action "saveConfig"}}>Save</button>
+  </div>
 </form>

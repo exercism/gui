@@ -5,10 +5,8 @@ export default Ember.Route.extend({
     return this.store.findAll('track');
   },
 
-  actions: {
-    willTransition() {
-      this.controller.set('selectedTrack', null);
-      return true;
-    }
+  setupController(controller, model) {
+    this._super(...arguments);
+    controller.set('selectedTrack', null);
   }
 });

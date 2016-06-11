@@ -10,9 +10,9 @@ let Validations = buildValidations({
 
 
 export default Ember.Component.extend(Validations, {
-  flashMessages: Ember.inject.service(),
   configuration: Ember.inject.service(),
-
+  notifier: Ember.inject.service(),
+  showingAdvanced: false,
   showInvalid: false,
 
   init() {
@@ -35,7 +35,8 @@ export default Ember.Component.extend(Validations, {
             xapi = this.get('xapi');
 
         this.get('configuration').writeConfigFile({ dir, apiKey, api, xapi });
-        this.get('flashMessages').positive(`Configuration saved to ${this.get('configFilePath')}`);
+
+        this.get('notifier').notify(`Configuration saved to ${this.get('configFilePath')}`);
       }
     }
   }

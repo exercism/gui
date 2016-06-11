@@ -1,0 +1,38 @@
+{{#if noSubmissions}}
+<div class="ui yellow message">
+  <div class="header">
+  {{status.recent.problem}}
+  </div>
+</div>
+{{else}}
+<div class="ui two column centered padded grid">
+  <div class="row">
+    <div class="sixteen wide column">
+      <div class="ui info message">
+        <div class="header">
+          Most recent problem
+        </div>
+        <p>
+        {{status.recent.problem}} submitted {{moment-from-now status.recent.submitted_at allowEmpty=true}}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="eigth wide column">
+      <h4 class="ui header">Submitted problems</h4>
+      <div class="ui horizontal divided list">
+        {{#each status.submitted as |exercise|}}
+          <div class="item">
+            {{exercise}}
+          </div>
+        {{/each}}
+      </div>
+    </div>
+    <div class="eigth wide column">
+      <h4 class="ui header">Skipped problems</h4>
+    </div>
+  </div>
+</div>
+
+{{/if}}

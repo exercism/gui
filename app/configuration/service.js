@@ -26,6 +26,7 @@ export default Ember.Service.extend({
     this.set('api', config.api ? config.api : defaults.api);
     this.set('xapi', config.xapi ? config.xapi : defaults.xapi);
     this.set('dir', config.dir ? config.dir : defaults.dir);
+    this.set('apiKey', config.apiKey ? config.apiKey : defaults.key);
   },
 
   fileExists(filePath) {

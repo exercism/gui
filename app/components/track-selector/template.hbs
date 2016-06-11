@@ -1,0 +1,7 @@
+{{#power-select
+  options=tracks
+  selected=selectedTrack
+  placeholder="Please, select a track"
+  onchange=(action "chooseTrack") as |track|}}
+  {{track.id}}
+{{/power-select}}

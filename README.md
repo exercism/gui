@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/holandes22/exercism-gui.png?label=ready&title=Ready)](https://waffle.io/holandes22/exercism-gui)
 # Exercism-gui
 
 This README outlines the details of collaborating on this Ember application.

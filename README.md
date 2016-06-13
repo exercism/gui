@@ -42,9 +42,9 @@ At build time, files are inspected with jshint so make sure there are not warnin
 
 ### Prerequisites:
 
-    - Latest version of node (check install instructions at https://nodejs.org/en/)
-    - Bower: `npm install -g bower`
-    - Watchman: optional but highly recommended (to listen on file changes for automatic rebuilds during dev: https://facebook.github.io/watchman/)
+- Latest version of node (check install instructions at https://nodejs.org/en/)
+- Bower: `npm install -g bower`
+- Watchman: optional but highly recommended (to listen on file changes for automatic rebuilds during dev: https://facebook.github.io/watchman/)
 
 
 ### Clone and get started

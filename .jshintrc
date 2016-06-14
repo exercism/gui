@@ -1,5 +1,8 @@
 {
   "predef": [
+    "process",
+    "requireNode",
+    "server",
     "document",
     "window",
     "-Promise"

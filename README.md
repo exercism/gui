@@ -51,17 +51,31 @@ At build time, files are inspected with jshint so make sure there are not warnin
 
 Clone and install the dependencies:
 
-    git clone git@github.com:holandes22/exercism-gui.git
-    cd exercism-gui
-    npm install
-    bower install
+    $ git clone git@github.com:holandes22/exercism-gui.git
+    $ cd exercism-gui
+    $ npm install
+    $ bower install
 
 Start the dev app
 
-    ember electron
+    $ ember electron
+
+_Note:_ The dev server by default uses [ember-cli-mirage](http://www.ember-cli-mirage.com/) to
+intercept outgoing  requests and mock API responses. This has the purpose of avoiding
+extra load on the API and be able to develop even if the API servers are down.
+If you want to disable this, set an envar DISABLE_EMBER_CLI_MIRAGE with a value of true:
+
+    $ DISABLE_EMBER_CLI_MIRAGE=true ember electron
 
 ### Running tests
-TODO
+
+To run the tests, do
+
+    $ ember electron:test
+
+If you want to leave the test running on each file save, TDD style:
+
+    $ ember electron:test --server
 
 ### Debugging
 TODO
@@ -70,7 +84,14 @@ TODO
 
 In order to package the app, run the following
 
-    ember electron:package --platform <your_platform> --arch <architecture>
+    ember electron:package --platform <your_platform> --arch <your_architecture>
 
 This will output a package under the `./electron-builds` folder
 
+_Note_: If you are on OSX or Linux and Have Wine configured, you can also cross-compile for
+Windows
+
+## Submitting a PR
+
+- If there is a ticket connected to the PR, add it as prefix in the subject. e.g. `gh-3 some comment closes #3`
+- If the commit closes one or several tickets, add comment like so `closes #<ticket_number>`

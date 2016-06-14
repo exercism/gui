@@ -13,7 +13,7 @@
           Most recent problem
         </div>
         <p>
-        {{status.recent.problem}} submitted {{moment-from-now status.recent.submitted_at allowEmpty=true}}
+        <strong>{{status.recent.problem}}</strong> submitted {{moment-from-now status.recent.submitted_at allowEmpty=true}}
         </p>
       </div>
     </div>
@@ -34,5 +34,4 @@
     </div>
   </div>
 </div>
-
 {{/if}}

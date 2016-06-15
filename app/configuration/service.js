@@ -12,12 +12,21 @@ export default Ember.Service.extend({
     this.update(config);
   },
 
+  getHomeConfigFilePath() {
+    return path.join(osHomedir(), '.exercism.json');
+  },
+
+  getHomeExercisesDir() {
+    return path.join(osHomedir(), 'exercism');
+
+  },
+
   getDefaults() {
       return {
         api: 'http://exercism.io',
         xapi: 'http://x.exercism.io',
         apiKey: null,
-        dir: path.join(osHomedir(), 'exercism')
+        dir: this.getHomeExercisesDir(),
     };
   },
 
@@ -43,7 +52,7 @@ export default Ember.Service.extend({
     if (configFilePath) {
       window.console.log(`Using config file ${configFilePath} set by envar EXERCISM_CONFIG_FILE`);
     } else {
-      configFilePath = path.join(osHomedir(), '.exercism.json');
+      configFilePath = this.getHomeConfigFilePath();
     }
     return configFilePath;
   },

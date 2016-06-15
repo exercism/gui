@@ -1,5 +1,7 @@
 {
   "predef": [
+    "requireNode",
+    "process",
     "server",
     "document",
     "window",

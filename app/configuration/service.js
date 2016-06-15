@@ -43,6 +43,7 @@ export default Ember.Service.extend({
       let stat = fs.statSync(filePath);
       return stat.isFile();
     } catch(err) {
+      window.console.log('file does not exists:', filePath);
       return false;
     }
   },
@@ -68,6 +69,7 @@ export default Ember.Service.extend({
     if (!this.fileExists(configFilePath)) {
       return this.getDefaults();
     }
+    window.console.log('hhh', configFilePath);
     return jsonfile.readFileSync(configFilePath);
   }
 

@@ -1,19 +1,25 @@
 import Ember from 'ember';
 import { validator, buildValidations } from 'ember-cp-validations';
 
+let presenceOptions = {
+  presence: true,
+  dependentKeys: ['validationsDisabled'],
+  disabled(model) {
+    return model.get('validationsDisabled');
+  }
+};
+
 let Validations = buildValidations({
-  dir: validator('presence', true),
-  api: validator('presence', true),
-  xapi: validator('presence', true),
-  apiKey: validator('presence', true)
+  dir: validator('presence', presenceOptions),
+  api: validator('presence', presenceOptions),
+  xapi: validator('presence', presenceOptions),
+  apiKey: validator('presence', presenceOptions)
 });
 
 
 export default Ember.Component.extend(Validations, {
-  configuration: Ember.inject.service(),
-  notifier: Ember.inject.service(),
   showingAdvanced: false,
-  showInvalid: false,
+  validationsDisabled: true,
 
   init() {
     this._super(...arguments);
@@ -22,21 +28,18 @@ export default Ember.Component.extend(Validations, {
 
   resetForm() {
     this.setProperties(this.get('config'));
-    this.set('showInvalid', false);
+    this.set('validationsDisabled', true);
   },
 
   actions: {
     saveConfig() {
-      this.set('showInvalid', true);
+      this.set('validationsDisabled', false);
       if (this.get('validations.isValid')) {
         let dir = this.get('dir'),
             apiKey = this.get('apiKey'),
             api = this.get('api'),
             xapi = this.get('xapi');
-
-        this.get('configuration').writeConfigFile({ dir, apiKey, api, xapi });
-
-        this.get('notifier').notify(`Configuration saved to ${this.get('configFilePath')}`);
+        this.attrs.saveConfig({ dir, apiKey, api, xapi });
       }
     }
   }

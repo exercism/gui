@@ -3,11 +3,12 @@ const notifier = requireNode('node-notifier');
 
 export default Ember.Service.extend({
 
+  notifier,
   notify(message) {
     let notification = message;
     if (typeof message === 'string') {
       notification = { title: 'Excersism GUI', message };
     }
-    notifier.notify(notification);
+    this.get('notifier').notify(notification);
   }
 });

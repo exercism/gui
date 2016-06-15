@@ -5,21 +5,21 @@
   </div>
 </div>
 
-<form class="ui form {{if (and showInvalid validations.isInvalid) 'error' ''}}">
-  <div class="field {{if (and showInvalid validations.attrs.dir.isinValid) 'error' ''}}">
+<form class="ui form {{if (v-get this 'isValid') '' 'error'}}">
+  <div class="field {{if validations.attrs.dir.isValid '' 'error'}}">
     <label>Exercises directory</label>
     <input
       type="text"
       value={{dir}}
       placeholder="Exercises directory"
       oninput={{action (mut dir) value="target.value"}}>
-    {{#if (and showInvalid validations.attrs.dir.message)}}
+    {{#if validations.attrs.dir.message}}
       <div class="ui error message">
         <p>{{validations.attrs.dir.messages}}</p>
       </div>
     {{/if}}
   </div>
-  <div class="field {{if (and showInvalid validations.attrs.apiKey.isinValid) 'error' ''}}">
+  <div class="field {{if validations.attrs.apiKey.isValid '' 'error'}}">
     <label>API key</label>
     {{#if (not apiKey)}}
       (see <a href="http://exercism.io/account/key">http://exercism.io/account/key</a>)
@@ -29,7 +29,7 @@
       value={{apiKey}}
       placeholder="API key"
       oninput={{action (mut apiKey) value="target.value"}}>
-    {{#if (and showInvalid validations.attrs.apiKey.message)}}
+    {{#if validations.attrs.apiKey.message}}
       <div class="ui error message">
         <p>{{validations.attrs.apiKey.messages}}</p>
       </div>
@@ -44,27 +44,27 @@
   </div>
 
   {{#if showingAdvanced}}
-  <div class="field {{if (and showInvalid validations.attrs.api.isinValid) 'error' ''}}">
+  <div class="field {{if validations.attrs.api.isValid '' 'error'}}">
     <label>Exercism API</label>
     <input
       type="text"
       value={{api}}
       placeholder="Exercism API"
       oninput={{action (mut api) value="target.value"}}>
-    {{#if (and showInvalid validations.attrs.api.message)}}
+    {{#if validations.attrs.api.message}}
       <div class="ui error message">
         <p>{{validations.attrs.api.messages}}</p>
       </div>
     {{/if}}
   </div>
-  <div class="field {{if (and showInvalid validations.attrs.apiKey.isinValid) 'error' ''}}">
+  <div class="field {{if validations.attrs.xapi.isValid '' 'error'}}">
     <label>Exercises API</label>
     <input
       type="text"
       value={{xapi}}
       placeholder="Exercises API"
       oninput={{action (mut xapi) value="target.value"}}>
-    {{#if (and showInvalid validations.attrs.xapi.message)}}
+    {{#if validations.attrs.xapi.message}}
       <div class="ui error message">
         <p>{{validations.attrs.xapi.messages}}</p>
       </div>

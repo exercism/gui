@@ -1,6 +1,6 @@
 {{#if noSubmissions}}
 <div class="ui yellow message">
-  <div class="header">
+  <div class="header" data-test-message-empty>
   {{status.recent.problem}}
   </div>
 </div>
@@ -9,11 +9,11 @@
   <div class="row">
     <div class="sixteen wide column">
       <div class="ui info message">
-        <div class="header">
+        <div class="header" data-test-message-header>
           Most recent problem
         </div>
         <p>
-        <strong>{{status.recent.problem}}</strong> submitted {{moment-from-now status.recent.submitted_at allowEmpty=true}}
+        <strong data-test-recent-problem>{{status.recent.problem}}</strong> submitted {{moment-from-now status.recent.submitted_at allowEmpty=true}}
         </p>
       </div>
     </div>
@@ -21,7 +21,7 @@
   <div class="row">
     <div class="eigth wide column">
       <h4 class="ui header">Submitted problems</h4>
-      <div class="ui horizontal divided list">
+      <div class="ui horizontal divided list" data-test-submitted>
         {{#each status.submitted as |exercise|}}
           <div class="item">
             {{exercise}}

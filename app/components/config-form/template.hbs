@@ -6,15 +6,16 @@
 </div>
 
 <form class="ui form {{if (v-get this 'isValid') '' 'error'}}">
-  <div class="field {{if validations.attrs.dir.isValid '' 'error'}}">
+  <div class="field {{if validations.attrs.dir.isValid '' 'error'}}" data-test-dir-field>
     <label>Exercises directory</label>
     <input
+      data-test-dir-input
       type="text"
       value={{dir}}
       placeholder="Exercises directory"
       oninput={{action (mut dir) value="target.value"}}>
     {{#if validations.attrs.dir.message}}
-      <div class="ui error message">
+      <div class="ui error message" data-test-dir-errmsg>
         <p>{{validations.attrs.dir.messages}}</p>
       </div>
     {{/if}}
@@ -73,6 +74,6 @@
   {{/if}}
   <div class="ui divider"></div>
   <div class="field">
-  <button class="ui blue button" {{action "saveConfig"}}>Save</button>
+  <button class="ui blue button" {{action "saveConfig"}} data-test-save-btn>Save</button>
   </div>
 </form>

@@ -1,4 +1,4 @@
-[![Stories in Ready](https://badge.waffle.io/holandes22/exercism-gui.png?label=ready&title=Ready)](https://waffle.io/holandes22/exercism-gui)
+[![Stories in Ready](https://badge.waffle.io/holandes23/exercism-gui.png?label=ready&title=Ready)](https://waffle.io/holandes22/exercism-gui)
 
 # Overview
 
@@ -37,6 +37,13 @@ as this is handled automatically, just be aware if creating files manually)
 ## Coding conventions
 
 At build time, files are inspected with jshint so make sure there are not warnings.
+
+## Writing tests
+
+- Follow ember conventions as close as possible https://guides.emberjs.com/v2.6.0/testing/
+- Use data-test-XYZ selectors to  find HTML components during tests, which helps decoupling
+  the HTML layout from finding stuff (thus we avoid breaking tests if we decide to do some
+  re-designing). We use `ember-test-selectors` addon to help manage this.
 
 ## Setting up the dev env
 
@@ -78,7 +85,28 @@ If you want to leave the test running on each file save, TDD style:
     $ ember electron:test --server
 
 ### Debugging
-TODO
+
+You have two debugging tools at your disposal: regular chromium dev tools and ember inspector.
+
+You can access the chromium dev tools via the menu in the dev server window (View -> Toggle Developer Tools)
+
+You can access the ember inspector via the link printed out to console when running `ember electron`:
+
+```
+$ ember electron
+Build successful - 2952ms.
+...
+...
+...
+--------------------------------------------------------------------
+Ember Inspector running on http://localhost:30820
+Open the inspector URL in a browser to debug the app!
+--------------------------------------------------------------------
+Starting Electron...
+--------------------------------------------------------------------
+devtron
+
+```
 
 ## Packaging
 

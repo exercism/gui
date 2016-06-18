@@ -1,0 +1,45 @@
+version: 0.0.{build}
+
+skip_non_tags: true
+
+build:
+    verbosity: minimal
+
+platform:
+  - x64
+
+cache:
+  - node_modules
+  - bower_components
+  - '%APPDATA%\npm-cache'
+
+environment:
+  eu_package_name: exercism-gui-win32-x64-%APPVEYOR_REPO_TAG_NAME%.zip
+
+install:
+  - ps: Install-Product node 6 x64
+  - npm install bower -g
+  - npm install
+  - bower install
+
+build_script:
+  - node --version
+  - node node_modules\ember-cli\bin\ember electron:package --platform win32 --arch x64
+
+after_build:
+  - 7z a electron-builds\%eu_package_name% electron-builds\exercism-gui-win32-x64
+  - ps: ls electron-builds
+
+artifacts:
+  - path: 'electron-builds\*.zip'
+    name: electron-package
+
+test: off
+
+deploy:
+  provider: GitHub
+  auth_token:
+    secure: 4Lc+r0RBFpZLKT+JZ5tlHQsEttScYJBtrTQ9BmtYQqcZyXlMP8v/+wjrBRdtY4XO
+  artifact: electron-package
+  on:
+    appveyor_repo_tag: true

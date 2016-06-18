@@ -32,11 +32,13 @@ before_install:
 install:
 - npm install
 - bower install
+- export DISPLAY=':99.0'
+- Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
 
 script:
 - '[ "$TRAVIS_OS_NAME" == "linux" ] && echo "linux" || export PATH="$PATH:node_modules/ember-cli/bin"'
 - ember --version
-- echo "we will run tests here"
+- ember electron:test
 
 after_success:
 - if [ -z "$TRAVIS_TAG" ]; then echo "Done!"; exit 0; fi

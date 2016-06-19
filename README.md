@@ -1,6 +1,9 @@
 [![Stories in Ready](https://badge.waffle.io/holandes23/exercism-gui.png?label=ready&title=Ready)](https://waffle.io/holandes22/exercism-gui)
 [![Windows Build status](https://ci.appveyor.com/api/projects/status/m7djinnk5hcyivab?svg=true)](https://ci.appveyor.com/project/holandes22/exercism-gui)
 [![Linux/Mac Build Status](https://travis-ci.org/holandes22/exercism-gui.svg?branch=master)](https://travis-ci.org/holandes22/exercism-gui)
+[![Dependency Status](https://david-dm.org/holandes22/exercism-gui.svg)](https://david-dm.org/holandes22/exercism-gui)
+[![devDependency Status](https://david-dm.org/holandes22/exercism-gui/dev-status.svg)](https://david-dm.org/holandes22/exercism-gui#info=devDependencies)
+[![Code Climate](https://codeclimate.com/github/holandes22/exercism-gui/badges/gpa.svg)](https://codeclimate.com/github/holandes22/exercism-gui)
 
 
 # Overview

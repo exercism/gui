@@ -8,6 +8,12 @@ const dirname              = __dirname || path.resolve(path.dirname());
 const emberAppLocation     = `file://${dirname}/dist/index.html`;
 const shell                = require('electron').shell;
 
+let debugPort = (typeof process.env.EU_REMOTE_DEBUGGING_PORT === 'undefined') ? '18315' : process.env.EU_REMOTE_DEBUGGING_PORT;
+
+app.commandLine.appendSwitch('remote-debugging-port', debugPort);
+
+require('electron-debug')();
+
 let mainWindow = null;
 
 // Uncomment the lines below to enable Electron's crash reporter

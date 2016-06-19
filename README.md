@@ -89,9 +89,10 @@ If you want to leave the test running on each file save, TDD style:
 
 ### Debugging
 
+#### Dev
 You have two debugging tools at your disposal: regular chromium dev tools and ember inspector.
 
-You can access the chromium dev tools via the menu in the dev server window (View -> Toggle Developer Tools)
+You can access the chromium dev tools via the menu in the dev server window (View -> Toggle Developer Tools) or by shortcut F12
 
 You can access the ember inspector via the link printed out to console when running `ember electron`:
 
@@ -110,6 +111,11 @@ Starting Electron...
 devtron
 
 ```
+
+#### Production
+
+In production, chrome dev tools can be accessed via browser when the app is running. Default port is 18315 `http://localhost:18315`
+The value of the port can be overidden with the envar `EU_REMOTE_DEBUGGING_PORT`
 
 ## Packaging
 

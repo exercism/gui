@@ -1,4 +1,6 @@
+{{log model}}
 <div class="ui negative message">
-  <div class="header">An error occured</div>
+  <div class="header" data-test-err-header>An error occurred</div>
   <p>{{model.message}}</p>
+  <p data-test-errors>{{model.errors}}</p>
 </div>

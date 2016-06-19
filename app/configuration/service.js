@@ -69,7 +69,6 @@ export default Ember.Service.extend({
     if (!this.fileExists(configFilePath)) {
       return this.getDefaults();
     }
-    window.console.log('hhh', configFilePath);
     return jsonfile.readFileSync(configFilePath);
   }
 

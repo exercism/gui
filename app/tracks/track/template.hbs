@@ -1,7 +1,7 @@
+{{#with model as |track|}}
 <div class="ui two column centered padded grid">
   <div class="row">
     <div class="twelve wide column">
-      {{#with model as |track|}}
       <div class="ui items">
         <div class="item">
           <a class="ui tiny image">
@@ -18,33 +18,11 @@
           </div>
         </div>
       </div>
-      {{/with}}
     </div>
     <div class="four wide column">
-      <div class="ui fluid vertical menu">
-        <div class="header item">Actions</div>
-        {{#if apiKeyUnset}}
-          {{#link-to "configuration" class="item"}}
-            <p>Please configure your API key to enable these actions</p>
-          {{/link-to}}
-        {{/if}}
-        {{#if apiKeyUnset}}
-        <div class="item">
-          <div class="ui disabled fluid button">Fetch</div>
-        </div>
-        <div class="item">
-          <div class="ui disabled fluid button">Show status</div>
-        </div>
-        {{else}}
-        <div class="item">
-          <div class="ui fluid button">Fetch</div>
-        </div>
-        <div class="item">
-          {{link-to "Show status" "tracks.track.status" model.id class="ui fluid button"}}
-        </div>
-        {{/if}}
-      </div>
+      {{track-action-menu track=track}}
     </div>
   </div>
 </div>
+{{/with}}
 {{outlet}}

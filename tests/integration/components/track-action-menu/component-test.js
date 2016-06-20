@@ -20,7 +20,8 @@ test('it disables actions if api key is unset', function(assert) {
   this.set('track', {});
   this.render(hbs`{{track-action-menu track=track}}`);
 
-  assert.equal(this.$(testSelector('disabled-msg')).text().trim(), 'Please configure your API key to enable these actions');
+  assert.ok(this.$(testSelector('fetch-btn')).hasClass('disabled'));
+  assert.ok(this.$(testSelector('status-btn')).hasClass('disabled'));
 });
 
 test('it enables actions if api key is set', function(assert) {
@@ -28,5 +29,6 @@ test('it enables actions if api key is set', function(assert) {
   this.set('track', {});
   this.render(hbs`{{track-action-menu track=track}}`);
 
-  assert.equal(this.$(testSelector('disabled-msg')).text(), '');
+  assert.notOk(this.$(testSelector('fetch-btn')).hasClass('disabled'));
+  assert.notOk(this.$(testSelector('status-btn')).hasClass('disabled'));
 });

@@ -2,20 +2,22 @@
   <div class="header item">Actions</div>
   {{#if apiKeyUnset}}
     {{#link-to "configuration" class="item"}}
-      <p data-test-disabled-msg>Please configure your API key to enable these actions</p>
+      <p>Please configure your API key to enable these actions</p>
     {{/link-to}}
-    <div class="item">
-      <div class="ui disabled fluid button">Fetch</div>
-    </div>
-    <div class="item">
-      <div class="ui disabled fluid button">Show status</div>
-    </div>
-  {{else}}
-    <div class="item">
-      <div class="ui fluid button">Fetch</div>
-    </div>
-    <div class="item">
-      {{link-to "Show status" "tracks.track.status" track.id class="ui fluid button"}}
-    </div>
   {{/if}}
+    <div class="item">
+      <div
+         data-test-fetch-btn
+        class="ui fluid button {{if apiKeyUnset 'disabled' ''}}">
+        Fetch
+      </div>
+    </div>
+    <div class="item">
+      <div
+         data-test-status-btn
+        class="ui fluid button {{if apiKeyUnset 'disabled' ''}}"
+        {{action (transition-to 'tracks.track.status' track.id)}}>
+        Show status
+      </div>
+    </div>
 </div>

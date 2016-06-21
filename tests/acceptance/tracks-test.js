@@ -42,18 +42,48 @@ test('it shows error page if api responds with error when listing tracks', funct
   });
 });
 
-test('it shows error page if api responds with error when getting track details', function(assert) {
-  server.get('http://x.exercism.io/tracks/elixir', { errors: ['There was an error'] }, 500);
+test('it shows submission link at submission route', function(assert) {
+  let slug = 'bob',
+      trackId = 'elixir',
+      url = 'http://exercism.io/submissions/fake';
 
-  const emberTestAdapterException = Ember.Test.adapter.exception;
-  Ember.Test.adapter.exception = td.function();
-
-  visit('/tracks/elixir');
+  server.create('track', { id: trackId });
+  server.get(
+    `http://exercism.io/api/v1/submissions/${trackId}/${slug}`,
+    { slug, url, track_id: trackId });
+  visit(`/tracks/${trackId}/status/submission/${slug}`);
 
   andThen(function() {
-    assert.equal(currentURL(), '/tracks/elixir');
-    assert.equal(find(testSelector('errors')).text().trim(), 'There was an error');
-
-    Ember.Test.adapter.exception = emberTestAdapterException;
+    let expected = `Link to latest submission for "${slug}"`;
+    assert.equal(find(testSelector('submission-header')).text().trim(), expected);
+    assert.equal(find(testSelector('submission-link')).text().trim(), url);
   });
+});
+
+test('it shows no submission message if 404', function(assert) {
+  let slug = 'bob',
+      trackId = 'elixir',
+      error = `No solutions found for "${slug}"`;
+
+  server.create('track', { id: trackId });
+  server.get(`http://exercism.io/api/v1/submissions/${trackId}/${slug}`, { error }, 404);
+  visit(`/tracks/${trackId}/status/submission/${slug}`);
+
+  andThen(function() {
+    assert.equal(find(testSelector('submission-header')).text().trim(), error);
+  });
+});
+
+test('it redirect to status when clicking on status button', function(assert) {
+  let lang = 'elixir';
+  server.create('track', { id: lang });
+
+  visit(`/tracks/${lang}`);
+  andThen(function() {
+    click(find(testSelector('status-btn')));
+    andThen(function() {
+      assert.equal(currentURL(), `/tracks/${lang}/status`);
+    });
+  });
+
 });

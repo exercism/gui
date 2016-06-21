@@ -1,6 +1,11 @@
-{{log model}}
 <div class="ui negative message">
   <div class="header" data-test-err-header>An error occurred</div>
   <p>{{model.message}}</p>
-  <p data-test-errors>{{model.errors}}</p>
+  {{#each model.errors as |error|}}
+    {{#if error.detail.error}}
+      <p><strong>{{error.status}}</strong> {{error.detail.error}}</p>
+    {{else}}
+      <p data-test-errors>{{model.errors}}</p>
+    {{/if}}
+  {{/each}}
 </div>

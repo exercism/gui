@@ -6,7 +6,8 @@ const path                 = require('path');
 const {app, BrowserWindow} = electron;
 const dirname              = __dirname || path.resolve(path.dirname());
 const emberAppLocation     = `file://${dirname}/dist/index.html`;
-const shell                = require('electron').shell;
+const shell                = electron.shell;
+const Menu = (electron.Menu || electron.remote.Menu);
 
 let debugPort = (typeof process.env.EU_REMOTE_DEBUGGING_PORT === 'undefined') ? '18315' : process.env.EU_REMOTE_DEBUGGING_PORT;
 
@@ -35,7 +36,7 @@ app.on('window-all-closed', function onWindowAllClosed() {
 app.on('ready', function onReady() {
     mainWindow = new BrowserWindow({
         width: 1024,
-        height: 720
+        height: 768
     });
 
     delete mainWindow.module;
@@ -105,6 +106,54 @@ app.on('ready', function onReady() {
 
     mainWindow.webContents.on('will-navigate', handleRedirect);
     mainWindow.webContents.on('new-window', handleRedirect);
+
+    // Add right click menu
+    mainWindow.webContents.on('context-menu', () => {
+      let template = [
+        { label: 'Cut', accelerator: 'CmdOrCtrl+X', selector: 'cut:', role: 'cut' },
+        { label: 'Copy', accelerator: 'CmdOrCtrl+C', selector: 'copy:', role: 'copy' },
+        { label: 'Paste', accelerator: 'CmdOrCtrl+V', selector: 'paste:', role: 'paste' },
+        { label: 'Select All', accelerator: 'CmdOrCtrl+A', selector: 'selectAll:', role: 'selectall' },
+        { type: 'separator' },
+        { label: 'Undo', accelerator: 'CmdOrCtrl+Z', selector: 'undo:', role: 'undo'},
+        { label: 'Redo', accelerator: 'Shift+CmdOrCtrl+Z', selector: 'redo:', role: 'redo' },
+        { type: 'separator' },
+        {
+          label: 'View',
+          submenu: [
+            {
+              label: 'Reload',
+              accelerator: 'CmdOrCtrl+R',
+              click(item, focusedWindow) {
+                if (focusedWindow) {
+                  focusedWindow.reload();
+                }
+              }
+            },
+            {
+              label: 'Toggle Full Screen',
+              accelerator: process.platform === 'darwin' ? 'Ctrl+Command+F' : 'F11',
+              click(item, focusedWindow) {
+                if (focusedWindow) {
+                  focusedWindow.setFullScreen(!focusedWindow.isFullScreen());
+                }
+              }
+            },
+            {
+              label: 'Toggle Developer Tools',
+              accelerator: process.platform === 'darwin' ? 'Alt+Command+I' : 'Ctrl+Shift+I',
+              click(item, focusedWindow) {
+                if (focusedWindow) {
+                  focusedWindow.webContents.toggleDevTools();
+                }
+              }
+            },
+          ]
+        },
+      ];
+      let menu = Menu.buildFromTemplate(template);
+      menu.popup(mainWindow);
+    });
 
 
 });

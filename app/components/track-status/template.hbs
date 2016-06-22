@@ -24,16 +24,22 @@
   <div class="row">
     <div class="eigth wide column">
       <h4 class="ui header">Submitted problems</h4>
-      <div class="ui horizontal divided list" data-test-submitted>
+      <div class="ui three stackable cards" data-test-submitted>
         {{#each status.submitted as |exercise|}}
-          <div class="item">
-            {{link-to exercise "tracks.track.status.submission" status.track_id exercise}}
-          </div>
+            {{#link-to "tracks.track.status.submission"
+              status.track_id exercise
+              class="ui card"}}
+              <div class="content">
+                {{exercise}}
+              </div>
+            {{/link-to}}
         {{/each}}
       </div>
     </div>
     <div class="eigth wide column">
-      {{yield}}
+      {{#pinned-content top=70}}
+        {{yield}}
+      {{/pinned-content}}
     </div>
   </div>
   <div class="row">

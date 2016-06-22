@@ -8,6 +8,7 @@
     "semantic-ui": "^2.1.8",
     "pretender": "~1.1.0",
     "Faker": "~3.1.0",
-    "testdouble": "testdouble/testdouble.js#^1.4.2"
+    "testdouble": "testdouble/testdouble.js#^1.4.2",
+    "animation-frame": "~0.2.4"
   }
 }

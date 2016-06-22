@@ -13,44 +13,22 @@ export default function() {
   this.namespace = 'api/v1';
 
   this.get('tracks/:id/status', (schema, request) => {
-    let id = request.params.id;
-    let problem = (id.indexOf('c')) ? 'list-ops' : "You haven't submitted any solutions yet";
+    let id = request.params.id,
+        submitted = faker.random.words(faker.random.number({ min: 1, max: 60 }))
+                    .toLowerCase()
+                    .split(' '),
+        skipped = faker.random.words(faker.random.number({ max: 20 }))
+                  .toLowerCase()
+                  .split(' '),
+        problem = (id.indexOf('c')) ? submitted[0] : "You haven't submitted any solutions yet";
     let hash = {
       track_id: id,
       recent: {
         problem,
         submitted_at: faker.date.recent()
       },
-      submitted: [
-        'hello-world', 'bob', 'list-ops',
-        'hello-world', 'bob', 'list-ops',
-        'hello-world', 'bob', 'list-ops',
-        'hello-world', 'bob', 'list-ops',
-        'hello-world', 'bob', 'list-ops',
-        'hello-world', 'bob', 'list-ops',
-        'hello-world', 'bob', 'list-ops',
-        'hello-world', 'bob', 'list-ops',
-        'hello-world', 'bob', 'list-ops',
-        'hello-world', 'bob', 'list-ops',
-        'hello-world', 'bob', 'list-ops',
-        'hello-world', 'bob', 'list-ops',
-        'hello-world', 'bob', 'list-ops',
-        'hello-world', 'bob', 'list-ops',
-        'hello-world', 'bob', 'list-ops',
-        'hello-world', 'bob', 'list-ops',
-        'hello-world', 'bob', 'list-ops',
-        'hello-world', 'bob', 'list-ops',
-        'hello-world', 'bob', 'list-ops',
-        'hello-world', 'bob', 'list-ops',
-        'hello-world', 'bob', 'list-ops',
-        'hello-world', 'bob', 'list-ops',
-        'hello-world', 'bob', 'list-ops',
-        'hello-world', 'bob', 'list-ops',
-        'hello-world', 'bob', 'list-ops',
-        'hello-world', 'bob', 'list-ops',
-        'hello-world', 'bob', 'list-ops',
-      ],
-      skipped: ['word-count']
+      submitted,
+      skipped,
     };
     return hash;
   });

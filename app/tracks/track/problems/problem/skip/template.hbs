@@ -1,0 +1,18 @@
+{{#if model.success}}
+<div class="ui positive message">
+  <div class="content">
+    <div class="header" data-test-skip-success>
+      {{model.success}}
+    </div>
+  </div>
+</div>
+{{else}}
+<div class="ui icon warning message">
+  <i class="warning icon"></i>
+  <div class="content">
+    <div class="header" data-test-skip-error>
+      {{model.error}}
+    </div>
+  </div>
+</div>
+{{/if}}

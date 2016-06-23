@@ -20,4 +20,22 @@
         Show status
       </div>
     </div>
+    <div class="item">
+      {{#power-select
+        class="ui dropdown"
+        options=track.problems
+        selected=problemToSkip
+        placeholder="Select a problem"
+        onchange=(action (mut problemToSkip)) as |problem|}}
+        {{problem}}
+      {{/power-select}}
+      <div class="item">
+        <div
+          data-test-status-skip
+          class="ui fluid button {{if (or apiKeyUnset (not problemToSkip)) 'disabled' ''}}"
+          {{action (transition-to 'tracks.track.problems.problem.skip' problemToSkip)}}>
+          Skip
+        </div>
+      </div>
+    </div>
 </div>

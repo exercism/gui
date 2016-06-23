@@ -7,13 +7,12 @@ const {app, BrowserWindow} = electron;
 const dirname              = __dirname || path.resolve(path.dirname());
 const emberAppLocation     = `file://${dirname}/dist/index.html`;
 const shell                = electron.shell;
-const Menu = (electron.Menu || electron.remote.Menu);
+const Menu                 = electron.Menu;
 
 let debugPort = (typeof process.env.EU_REMOTE_DEBUGGING_PORT === 'undefined') ? '18315' : process.env.EU_REMOTE_DEBUGGING_PORT;
 
 app.commandLine.appendSwitch('remote-debugging-port', debugPort);
 
-require('electron-debug')();
 
 let mainWindow = null;
 
@@ -35,9 +34,13 @@ app.on('window-all-closed', function onWindowAllClosed() {
 
 app.on('ready', function onReady() {
     mainWindow = new BrowserWindow({
-        width: 1024,
-        height: 768
+      minWidth: 1024,
+      minHeight: 768,
+      width: 1024,
+      height: 768
     });
+
+    mainWindow.maximize();
 
     delete mainWindow.module;
 
@@ -154,6 +157,4 @@ app.on('ready', function onReady() {
       let menu = Menu.buildFromTemplate(template);
       menu.popup(mainWindow);
     });
-
-
 });

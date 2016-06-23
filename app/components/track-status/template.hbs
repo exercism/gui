@@ -8,21 +8,16 @@
 <div class="ui two column centered padded grid">
   <div class="row">
     <div class="sixteen wide column">
-      <div class="ui success icon message">
-        <i class="file outline icon"></i>
-        <div class="content">
-          <div class="header" data-test-message-header>
-            Most recent problem
-          </div>
-          <p>
-          <strong data-test-recent-problem>{{status.recent.problem}}</strong> submitted {{moment-from-now status.recent.submitted_at allowEmpty=true}}
-          </p>
+      <div class="ui secondary inverted violet center aligned segment">
+        <h4 class="ui header" data-test-message-header>Most recent problem</h4>
+        <div>
+        <strong data-test-recent-problem>{{status.recent.problem}}</strong> submitted {{moment-from-now status.recent.submitted_at allowEmpty=true}}
         </div>
       </div>
     </div>
   </div>
   <div class="row">
-    <div class="eigth wide column">
+    <div class="ten wide column">
       <h4 class="ui header">Submitted problems</h4>
       <div class="ui three stackable cards" data-test-submitted>
         {{#each status.submitted as |exercise|}}
@@ -36,7 +31,7 @@
         {{/each}}
       </div>
     </div>
-    <div class="eigth wide column">
+    <div class="six wide column">
       {{#pinned-content top=70}}
         {{yield}}
       {{/pinned-content}}

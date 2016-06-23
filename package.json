@@ -106,7 +106,6 @@
     }
   },
   "dependencies": {
-    "electron-debug": "^1.0.1",
     "jsonfile": "^2.3.1",
     "node-notifier": "^4.6.0",
     "os-homedir": "^1.0.1",

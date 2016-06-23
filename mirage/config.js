@@ -1,4 +1,4 @@
-import { faker } from 'ember-cli-mirage';
+import { faker, Response } from 'ember-cli-mirage';
 
 export default function() {
 
@@ -41,5 +41,9 @@ export default function() {
       slug,
       track_id
     };
+  });
+
+  this.post('iterations/:track/:slug/skip', () => {
+    return new Response(204, {}, {});
   });
 }

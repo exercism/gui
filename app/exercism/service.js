@@ -25,5 +25,19 @@ export default Ember.Service.extend({
       }
       throw error;
     });
+  },
+
+  skip(track, slug) {
+    let apiKey = this.get('configuration.apiKey'),
+        api = this.get('configuration.api'),
+        url = urlJoin(api, `/api/v1/iterations/${track}/${slug}/skip?key=${apiKey}`);
+    return this.get('ajax').post(url).then(() => {
+      return { success: `Skipped ${slug} in track ${track}` };
+    }).catch((error) => {
+      if(isNotFoundError) {
+        return { error: error.errors[0].detail.error };
+      }
+      throw error;
+    });
   }
 });

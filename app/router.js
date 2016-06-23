@@ -11,6 +11,12 @@ Router.map(function() {
       this.route('status', function() {
         this.route('submission', { path: 'submission/:slug' });
       });
+
+      this.route('problems', function() {
+        this.route('problem', { path: ':problem_id' }, function() {
+          this.route('skip');
+        });
+      });
     });
   });
   this.route('configuration');

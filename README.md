@@ -111,14 +111,11 @@ Open the inspector URL in a browser to debug the app!
 --------------------------------------------------------------------
 Starting Electron...
 --------------------------------------------------------------------
-devtron
-
 ```
 
 #### Production
 
-In production, chrome dev tools can be accessed via browser when the app is running. Default port is 18315 `http://localhost:18315`
-The value of the port can be overidden with the envar `EU_REMOTE_DEBUGGING_PORT`
+In production, chrome dev tools can be accessed by right clicking on at app and selecting `View -> Toggle Developer Tools`
 
 ## Packaging
 

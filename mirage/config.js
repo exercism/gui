@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import { faker, Response } from 'ember-cli-mirage';
 
 export default function() {
@@ -7,6 +8,46 @@ export default function() {
   this.timing = 400;      // delay for each request, automatically set to 0 during testing
   this.get('/tracks');
   this.get('/tracks/:id');
+
+  this.get('/v2/exercises/:track', (schema, request) => {
+    let track = request.params.track,
+        slug = 'exercism-gui-fake-problem';
+
+    return {
+      problems: [{
+          track_id: track,
+          language: track,
+          slug: slug,
+          name: Ember.String.capitalize(slug),
+          files: {
+              'problem.rs': 'problem',
+              'problem_tests.rs': 'tests',
+              'README.md': 'readme'
+          },
+          fresh: false
+      }]
+    };
+  });
+
+  this.get('/v2/exercises/:track/:slug', (schema, request) => {
+    let track = request.params.track,
+        slug = request.params.slug;
+
+    return {
+      problems: [{
+          track_id: track,
+          language: track,
+          slug: slug,
+          name: Ember.String.capitalize(slug),
+          files: {
+              'problem.rs': 'problem',
+              'problem_tests.rs': 'tests',
+              'README.md': 'readme'
+          },
+          fresh: false
+      }]
+    };
+  });
 
   // Exercism API
   this.urlPrefix = 'http://exercism.io';

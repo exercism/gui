@@ -7,14 +7,16 @@
   {{/if}}
     <div class="item">
       <div
-         data-test-fetch-btn
+        data-test-fetch-btn
+        class="ui fluid button {{if apiKeyUnset 'disabled' ''}}"
+        {{action (route-action 'fetch')}}
         class="ui fluid button {{if apiKeyUnset 'disabled' ''}}">
         Fetch
       </div>
     </div>
     <div class="item">
       <div
-         data-test-status-btn
+        data-test-status-btn
         class="ui fluid button {{if apiKeyUnset 'disabled' ''}}"
         {{action (transition-to 'tracks.track.status' track.id)}}>
         Show status

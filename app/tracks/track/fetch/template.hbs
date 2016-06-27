@@ -1,0 +1,51 @@
+<div class="ui horizontal divider">Fetch summary</div>
+
+{{#each model as |info|}}
+<div class="ui large relaxed list">
+  <div class="item">
+    <i class="folder icon"></i>
+    <div class="content">
+      <div class="header">{{info.problem}}</div>
+      <div class="list">
+        {{#if info.new}}
+        <div class="item">
+          <i class="folder icon"></i>
+          <div class="content">
+            <div class="header">New files</div>
+            <div class="list">
+              {{#each info.new as |new|}}
+              <div class="item">
+                <i class="file outline text green icon"></i>
+                <div class="content">
+                  <div>{{new}}</div>
+                </div>
+              </div>
+              {{/each}}
+            </div>
+          </div>
+        </div>
+        {{/if}}
+        {{#if info.unchanged}}
+        <div class="item">
+          <i class="folder icon"></i>
+          <div class="content">
+            <div class="header">Unchanged files</div>
+            <div class="list">
+              {{#each info.unchanged as |unchanged|}}
+              <div class="item">
+                <i class="file outline text violet icon"></i>
+                <div class="content">
+                  <div>{{unchanged}}</div>
+                </div>
+              </div>
+              {{/each}}
+            </div>
+          </div>
+        </div>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ui divider"></div>
+{{/each}}

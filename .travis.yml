@@ -56,5 +56,5 @@ deploy:
   file: electron-builds/*.tar.gz
   on:
     tags: true
-    repo: holandes22/exercism-gui
+    repo: exercism/gui
     all_branches: true

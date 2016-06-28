@@ -1,19 +1,25 @@
 {{#with model as |track|}}
-<div class="ui two column centered padded grid">
+<div class="ui two column padded grid">
   <div class="row">
     <div class="twelve wide column">
       <div class="ui items">
         <div class="item">
           <a class="ui tiny image">
-            <img src="{{track.imageSrc}}" onerror="this.src='assets/images/e_red_small.png';">
+          <img src="{{track.imageSrc}}" height="80" width="80" onerror="this.src='assets/images/e_red_small.png';">
           </a>
           <div class="content">
             <a class="header">{{track.language}} track</a>
             <div class="extra">
-              <p>Track details <a href="{{track.languageUrl}}">{{track.languageUrl}}</a></p>
-            </div>
-            <div class="extra">
+              <div>
+              Track details <a href="{{track.languageUrl}}">{{track.languageUrl}}</a>
+              </div>
+              <div>
               Repository <a href="{{track.repository}}">{{track.repository}}</a>
+              </div>
+              <div>
+              <i class="keyboard icon"></i>
+              {{track.problems.length}} Problems
+              </div>
             </div>
           </div>
         </div>

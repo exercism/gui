@@ -5,12 +5,13 @@
 [![devDependency Status](https://david-dm.org/exercism/gui/dev-status.svg)](https://david-dm.org/exercism/gui#info=devDependencies)
 [![Code Climate](https://codeclimate.com/github/exercism/gui/badges/gpa.svg)](https://codeclimate.com/github/exercism/gui)
 
+__NOTE__: This is still a working progress. First usable release is expected to be `0.1.0`
 
 # Overview
 
 Excercism GUI purpose is to complement the command line interface (CLI) for [exercism.io](http://exercism.io/)
 
-It aims to be a cross-platform desktop app that lowers the barrier of entry for people that feel
+It aims to be a cross-platform desktop app that lowers the barrier of entry for people which feel
 more comfortable with a graphical interface than the command line.
 
 # Contributing guide
@@ -23,7 +24,7 @@ This is an application written with the help of the following technologies:
 
 - [ember.js](http://emberjs.com/) An awesome javascript web framework
 - [electron](http://electron.atom.io/) To build the cross-platform desktop app
-- [ember-electron](https://github.com/felixrieseberg/ember-electron) and ember.js addon that facilitates
+- [ember-electron](https://github.com/felixrieseberg/ember-electron) an ember.js addon that facilitates
   ember and electron integration (dev, packaging, running tests, etc.)
 - node.js and node packages to communicate with the desktop (notifications, file system, etc.)
 
@@ -62,10 +63,9 @@ At build time, files are inspected with jshint so make sure there are not warnin
 
 ### Clone and get started
 
-Clone and install the dependencies:
+After forking and cloning the exercism/gui repo, install the dependencies:
 
-    $ git clone git@github.com:exercism/gui.git
-    $ cd exercism-gui
+    $ cd /path/to/repo
     $ npm install
     $ bower install
 
@@ -93,25 +93,13 @@ If you want to leave the test running on each file save, TDD style:
 ### Debugging
 
 #### Dev
-You have two debugging tools at your disposal: regular chromium dev tools and ember inspector.
+You have the regular debugging tools at your disposal: chromium dev tools, devtron and ember inspector.
 
-You can access the chromium dev tools via the menu in the dev server window (View -> Toggle Developer Tools) or by shortcut F12
+You can access the chromium dev tools via the menu in the dev server window (View -> Toggle Developer Tools) or by shortcut (Ctrl+Shift+I on Linux)
 
-You can access the ember inspector via the link printed out to console when running `ember electron`:
+TODO: specify dev tools shortcuts for Mac/Windows
 
-```
-$ ember electron
-Build successful - 2952ms.
-...
-...
-...
---------------------------------------------------------------------
-Ember Inspector running on http://localhost:30820
-Open the inspector URL in a browser to debug the app!
---------------------------------------------------------------------
-Starting Electron...
---------------------------------------------------------------------
-```
+You can access the ember inspector and devtron from their respective tabs within the dev tools.
 
 #### Production
 
@@ -125,7 +113,7 @@ In order to package the app, run the following
 
 This will output a package under the `./electron-builds` folder
 
-_Note_: If you are on OSX or Linux and Have Wine configured, you can also cross-compile for
+_Note_: If you are on OSX or Linux and Have [Wine](https://www.winehq.org/) configured, you can also cross-compile for
 Windows
 
 ## Submitting a PR

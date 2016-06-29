@@ -23,6 +23,14 @@
       </div>
     </div>
     <div class="item">
+      <div
+        data-test-submitting-btn
+        class="ui fluid button {{if apiKeyUnset 'disabled' ''}}"
+        {{action (transition-to 'tracks.track.local-problems' track.id)}}>
+        Submitting
+      </div>
+    </div>
+    <div class="item">
       {{#power-select
         class="ui dropdown"
         options=track.problems

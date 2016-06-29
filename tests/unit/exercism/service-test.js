@@ -39,3 +39,34 @@ test('saveProblems skips files that already exist and creates missing', function
   assert.deepEqual(info.new, ['problem_test.ex']);
   assert.deepEqual(info.unchanged, ['problem.ex']);
 });
+
+test('getLocalProblems filters out invalid dirs', function(assert) {
+  let service = this.subject();
+  mockFs({ '/t/elixir/bob': {}, '/t/elixir/bad-one': {} });
+  let problems = service.getLocalProblems('/t', 'elixir', ['bob']);
+  assert.equal(problems.length, 1);
+  assert.equal(problems[0].name, 'bob');
+});
+
+test('getLocalProblems lists all files in a dir and excludes tests and readme', function(assert) {
+  let service = this.subject();
+  mockFs({
+    '/t/elixir': {
+      'bob': {
+        'bob.ex': 'a',
+        'some_file': 'b'
+      },
+      'hello-world': {
+        'hello_world.ex': 'a',
+        'hello_world_test.ex': 'b',
+        'README.md': 'c'
+      }
+    }
+  });
+  let problems = service.getLocalProblems('/t', 'elixir', ['bob', 'hello-world']),
+      expected = [
+    { name: 'bob', files: ['bob.ex', 'some_file'], dir: '/t/elixir/bob' },
+    { name: 'hello-world', files: ['hello_world.ex'], dir: '/t/elixir/hello-world' }
+  ];
+  assert.deepEqual(problems, expected);
+});

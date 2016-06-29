@@ -19,6 +19,7 @@ Router.map(function() {
           this.route('skip');
         });
       });
+      this.route('local-problems');
     });
   });
   this.route('configuration');

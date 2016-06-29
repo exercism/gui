@@ -31,6 +31,7 @@ export default Factory.extend({
     for(let i=0; i <= length; i++) {
       problems.push(faker.lorem.word());
     }
+    problems.push('exercism-gui-fake-problem');
     return problems;
   }
 

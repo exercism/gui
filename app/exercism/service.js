@@ -104,6 +104,36 @@ export default Ember.Service.extend({
       });
       return this.saveProblems(fetchedProblems, this.get('configuration.dir'));
     });
+  },
+
+  _getValidLocalDirs(root, validSlugs) {
+    let dirs = [];
+    lodash.forEach(fs.readdirSync(root), (file) => {
+      let fpath = path.join(root, file);
+      if (fs.statSync(fpath).isDirectory() && validSlugs.contains(file)) {
+        dirs.push(fpath);
+      }
+    });
+    return dirs;
+  },
+
+  _getProblemFiles(dir) {
+    return fs.readdirSync(dir).filter((file) => {
+      let fpath = path.join(dir, file);
+      return fs.statSync(fpath).isFile() && file !== 'README.md' && !file.includes('test');
+    });
+  },
+
+  getLocalProblems(exercismDir, trackId, validSlugs) {
+    let trackDir = path.join(exercismDir, trackId),
+        problems = [],
+        dirs = this._getValidLocalDirs(trackDir, validSlugs);
+    lodash.forEach(dirs, (dir) => {
+      let files = this._getProblemFiles(dir),
+          name = path.basename(dir);
+      problems.push({ name, files, dir });
+    });
+    return problems;
   }
 
 });

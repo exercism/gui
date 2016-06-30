@@ -1,0 +1,38 @@
+{{#if problems}}
+<div class="ui grid">
+  <div class="row">
+    <div class="six wide column">
+      {{#power-select
+        options=problems
+        selected=selectedProblem
+        placeholder="Please, select a problem"
+        onchange=(action (mut selectedProblem)) as |problem|}}
+        {{problem.name}}
+      {{/power-select}}
+    </div>
+    <div class="ten wide column" data-test-dir>
+      {{#if selectedProblem}}
+      <div class="ui tiny pink header">
+        <i class="folder open outline icon"></i>
+        <div class="content">
+          {{selectedProblem.dir}}
+        </div>
+      </div>
+      {{/if}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="sixteen wide column" data-test-file-selector>
+    {{#if selectedProblem}}
+      {{file-selector problem=selectedProblem submit=(route-action 'submit')}}
+    {{/if}}
+    </div>
+  </div>
+</div>
+{{else}}
+<div class="ui secondary inverted red segment">
+  <p data-test-no-problems-msg>
+    No problem files found under this track
+  </p>
+</div>
+{{/if}}

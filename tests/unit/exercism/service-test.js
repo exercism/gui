@@ -42,14 +42,48 @@ test('saveProblems skips files that already exist and creates missing', function
 
 test('getLocalProblems filters out invalid dirs', function(assert) {
   let service = this.subject();
+  service.configuration = { dir: '/t' };
   mockFs({ '/t/elixir/bob': {}, '/t/elixir/bad-one': {} });
-  let problems = service.getLocalProblems('/t', 'elixir', ['bob']);
+  let problems = service.getLocalProblems('elixir', ['bob']);
   assert.equal(problems.length, 1);
   assert.equal(problems[0].name, 'bob');
 });
 
+test('getLocalProblems returns empty list if no track dir', function(assert) {
+  let service = this.subject();
+  service.configuration = { dir: '/t' };
+  mockFs({ '/t/': {} });
+  let problems = service.getLocalProblems('elixir', ['bob']);
+  assert.equal(problems.length, 0);
+});
+
+test('getLocalProblems returns empty list if track dir is not a dir', function(assert) {
+  let service = this.subject();
+  service.configuration = { dir: '/t' };
+  mockFs({ '/t/elixir': 'file content' });
+  let problems = service.getLocalProblems('elixir', ['bob']);
+  assert.equal(problems.length, 0);
+});
+
+test('getLocalProblems returns empty list if problem dir is not a dir', function(assert) {
+  let service = this.subject();
+  service.configuration = { dir: '/t' };
+  mockFs({ '/t/elixir/bob': 'file content' });
+  let problems = service.getLocalProblems('elixir', ['bob']);
+  assert.equal(problems.length, 0);
+});
+
+test('getLocalProblems returns empty list if no problem dir', function(assert) {
+  let service = this.subject();
+  service.configuration = { dir: '/t' };
+  mockFs({ '/t/elixir': {} });
+  let problems = service.getLocalProblems('elixir', ['bob']);
+  assert.equal(problems.length, 0);
+});
+
 test('getLocalProblems lists all files in a dir and excludes tests and readme', function(assert) {
   let service = this.subject();
+  service.configuration = { dir: '/t' };
   mockFs({
     '/t/elixir': {
       'bob': {
@@ -63,7 +97,7 @@ test('getLocalProblems lists all files in a dir and excludes tests and readme', 
       }
     }
   });
-  let problems = service.getLocalProblems('/t', 'elixir', ['bob', 'hello-world']),
+  let problems = service.getLocalProblems('elixir', ['bob', 'hello-world']),
       expected = [
     { name: 'bob', files: ['bob.ex', 'some_file'], dir: '/t/elixir/bob' },
     { name: 'hello-world', files: ['hello_world.ex'], dir: '/t/elixir/hello-world' }

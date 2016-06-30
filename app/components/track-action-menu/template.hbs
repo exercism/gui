@@ -1,4 +1,4 @@
-<div class="ui fluid vertical menu">
+<div class="ui fluid vertical compact mini menu">
   <div class="header item">Actions</div>
   {{#if apiKeyUnset}}
     {{#link-to "configuration" class="item"}}
@@ -8,16 +8,15 @@
     <div class="item">
       <div
         data-test-fetch-btn
-        class="ui fluid button {{if apiKeyUnset 'disabled' ''}}"
         {{action (route-action 'fetch')}}
-        class="ui fluid button {{if apiKeyUnset 'disabled' ''}}">
+        class="ui primary basic fluid button {{if apiKeyUnset 'disabled' ''}}">
         Fetch
       </div>
     </div>
     <div class="item">
       <div
         data-test-status-btn
-        class="ui fluid button {{if apiKeyUnset 'disabled' ''}}"
+        class="ui primary basic fluid button {{if apiKeyUnset 'disabled' ''}}"
         {{action (transition-to 'tracks.track.status' track.id)}}>
         Show status
       </div>
@@ -25,7 +24,7 @@
     <div class="item">
       <div
         data-test-submitting-btn
-        class="ui fluid button {{if apiKeyUnset 'disabled' ''}}"
+        class="ui primary basic fluid button {{if apiKeyUnset 'disabled' ''}}"
         {{action (transition-to 'tracks.track.local-problems' track.id)}}>
         Submitting
       </div>
@@ -42,7 +41,7 @@
       <div class="item">
         <div
           data-test-status-skip
-          class="ui fluid button {{if (or apiKeyUnset (not problemToSkip)) 'disabled' ''}}"
+          class="ui primary basic fluid button {{if (or apiKeyUnset (not problemToSkip)) 'disabled' ''}}"
           {{action (transition-to 'tracks.track.problems.problem.skip' problemToSkip)}}>
           Skip
         </div>

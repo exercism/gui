@@ -1,2 +1,5 @@
-{{track-selector tracks=model action=(route-action "showTrack") class="track-selector"}}
+{{track-selector
+    selectedTrack=selectedTrack
+    tracks=model
+    action=(route-action "showTrack") class="track-selector"}}
 {{outlet}}

@@ -108,6 +108,9 @@ export default Ember.Service.extend({
 
   _getValidLocalDirs(root, validSlugs) {
     let dirs = [];
+    if (!fs.existsSync(root) || !fs.statSync(root).isDirectory()) {
+      return dirs;
+    }
     lodash.forEach(fs.readdirSync(root), (file) => {
       let fpath = path.join(root, file);
       if (fs.statSync(fpath).isDirectory() && validSlugs.contains(file)) {
@@ -124,8 +127,9 @@ export default Ember.Service.extend({
     });
   },
 
-  getLocalProblems(exercismDir, trackId, validSlugs) {
-    let trackDir = path.join(exercismDir, trackId),
+  getLocalProblems(trackId, validSlugs) {
+    let exercismDir = this.get('configuration.dir'),
+        trackDir = path.join(exercismDir, trackId),
         problems = [],
         dirs = this._getValidLocalDirs(trackDir, validSlugs);
     lodash.forEach(dirs, (dir) => {
@@ -134,6 +138,25 @@ export default Ember.Service.extend({
       problems.push({ name, files, dir });
     });
     return problems;
+  },
+
+  submit(filePath) {
+    let key = this.get('configuration.apiKey'),
+        api = this.get('configuration.api'),
+        dir = this.get('configuration.dir'),
+        fileName = path.basename(filePath),
+        problem = path.basename(path.dirname(filePath)),
+        language = path.basename(path.dirname(path.dirname(filePath))),
+        solutionString = fs.readFileSync(filePath, { encoding: 'utf-8' }),
+        url = urlJoin(api, '/api/v1/user/assignments'),
+        solution = {};
+    solution[fileName] = solutionString;
+    let payload = { key, dir, language, problem, solution, code: '' };
+    let options = {
+      data: JSON.stringify(payload),
+      headers: {'Content-Type': 'application/json'}
+    };
+    return this.get('ajax').post(url, options);
   }
 
 });

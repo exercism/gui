@@ -1,0 +1,20 @@
+{{#if problem.files}}
+<div class="ui large form">
+  <div class="grouped inline fields">
+    <h5 class="ui dividing header">Available files</h5>
+    {{#each problem.files as |file|}}
+    <div class="field" data-test-files>
+      {{ui-radio name="selectedFile" value=file label=file current=selectedFile}}
+    </div>
+    {{/each}}
+  </div>
+  <button
+    data-test-submit-btn
+    class="ui secondary basic button {{if selectedFile '' 'disabled'}}"
+    {{action "submit"}}>
+      Submit
+  </button>
+</div>
+{{else}}
+  <p data-test-no-files-msg>No files available</p>
+{{/if}}

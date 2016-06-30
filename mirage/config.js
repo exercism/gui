@@ -87,4 +87,26 @@ export default function() {
   this.post('iterations/:track/:slug/skip', () => {
     return new Response(204, {}, {});
   });
+
+  this.post('user/assignments', (schema, request) => {
+    window.console.log(request.requestBody);
+    const attrs = JSON.parse(request.requestBody);
+    window.console.log(attrs);
+    let id = 'fakesubmissioon',
+        submissionPath = `submissions/${id}`;
+    let data = {
+      id,
+      iteration: 1,
+      status: 'saved',
+      slug: attrs.problem,
+      track: attrs.language,
+      exercise: attrs.problem,
+      track_id: attrs.language,
+      submission_path: `/${submissionPath}`,
+      url: `http://exercism.io/${submissionPath}`,
+      language: Ember.String.capitalize(attrs.language),
+      name: Ember.String.capitalize(attrs.problem),
+    };
+    return new Response(204, {}, data);
+  });
 }

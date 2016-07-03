@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import {isNotFoundError} from 'ember-ajax/errors';
+import {isNotFoundError, isBadRequestError } from 'ember-ajax/errors';
 
 const urlJoin = requireNode('url-join'),
       fs = requireNode('fs'),
@@ -23,7 +23,7 @@ export default Ember.Service.extend({
         api = this.get('configuration.api'),
         url = urlJoin(api, `/api/v1/submissions/${track}/${slug}?key=${apiKey}`);
     return this.get('ajax').request(url).catch((error) => {
-      if(isNotFoundError) {
+      if(isNotFoundError(error)) {
         return { url: null, track_id: track, slug };
       }
       throw error;
@@ -37,7 +37,7 @@ export default Ember.Service.extend({
     return this.get('ajax').post(url).then(() => {
       return { success: `Skipped ${slug} in track ${track}` };
     }).catch((error) => {
-      if(isNotFoundError) {
+      if(isNotFoundError(error)) {
         return { error: error.errors[0].detail.error };
       }
       throw error;
@@ -156,7 +156,11 @@ export default Ember.Service.extend({
       data: JSON.stringify(payload),
       headers: {'Content-Type': 'application/json'}
     };
-    return this.get('ajax').post(url, options);
+    return this.get('ajax').post(url, options).catch((error) => {
+      if(isBadRequestError(error)) {
+        return { error: error.errors[0].detail.error };
+      }
+      throw error;
+    });
   }
-
 });

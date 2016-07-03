@@ -1,0 +1,16 @@
+{{#if status.error}}
+<div class="ui negative message">
+  <div class="header" data-test-error-msg>
+  {{status.error}}
+  </div>
+  <p>Submitted file was {{status.submittedFile}}</p>
+</div>
+{{else}}
+<div class="ui positive message">
+  <div class="header" data-test-success-msg>
+  File {{status.success.submittedFile}} submitted succesfully
+  </div>
+  <p data-test-iteration>Iteration number {{status.success.iteration}}</p>
+</div>
+{{/if}}
+

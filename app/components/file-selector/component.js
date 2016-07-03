@@ -1,15 +1,14 @@
 import Ember from 'ember';
 
+const path = requireNode('path');
+
 export default Ember.Component.extend({
   selectedFile: null,
 
   actions: {
     submit() {
-      this.attrs.submit(
-        this.get('selectedFile'),
-        this.get('problem.name'),
-        this.get('problem.dir')
-      );
+      let filePath = path.join(this.get('problem.dir'), this.get('selectedFile'));
+      this.attrs.submit(btoa(filePath));
     }
   }
 });

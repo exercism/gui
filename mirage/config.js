@@ -90,11 +90,17 @@ export default function() {
 
   this.post('user/assignments', (schema, request) => {
     const attrs = JSON.parse(request.requestBody);
-    let id = 'fakesubmissioon',
+    if (attrs.language === 'bash') {
+      return new Response(400, {}, { error: 'duplicate of previous iteration' });
+    }
+    if (attrs.language === 'perl') {
+      return new Response(500, {}, { error: ['some error'] });
+    }
+    let id = faker.random.uuid(),
         submissionPath = `submissions/${id}`;
     let data = {
       id,
-      iteration: 1,
+      iteration: faker.random.number({ min: 1, max: 25 }),
       status: 'saved',
       slug: attrs.problem,
       track: attrs.language,
@@ -105,6 +111,6 @@ export default function() {
       language: Ember.String.capitalize(attrs.language),
       name: Ember.String.capitalize(attrs.problem),
     };
-    return new Response(204, {}, data);
+    return new Response(201, {}, data);
   });
 }

@@ -5,18 +5,18 @@
         <div class="header item">Track selection</div>
         <div class="item">
         {{track-selector
-            selectedTrack=selectedTrack
+            selectedTrack=selections.selectedTrack
             tracks=model
             action=(route-action "showTrack") class="track-selector"}}
         </div>
         {{track-action-menu
-          track=selectedTrack
+          track=selections.selectedTrack
           problemToSkip=null
           open=(route-action "open")}}
       </div>
     </div>
     <div class="thirteen wide column">
-      {{#if (not selectedTrack)}}
+      {{#if (not selections.selectedTrack)}}
       <div class="ui left pointing pink basic label">
         Select a track from the menu to start
       </div>

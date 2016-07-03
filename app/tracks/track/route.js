@@ -3,14 +3,14 @@ import Ember from 'ember';
 const {getOwner} = Ember;
 
 export default Ember.Route.extend({
+  selections: Ember.inject.service(),
   model(params) {
     return this.store.peekRecord('track', params.track_id);
   },
 
-  setupController(controller, model) {
-    this._super(...arguments);
+  afterModel(model) {
     // set track in track selector when we go directly to this route
-    this.controllerFor('tracks').set('selectedTrack', model);
+    this.set('selections.selectedTrack', model);
   },
 
   actions: {

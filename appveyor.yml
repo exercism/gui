@@ -11,7 +11,7 @@ platform:
 
 cache:
   - node_modules
-  - bower_components
+  - bower_components -> bower.json
   - '%APPDATA%\npm-cache'
 
 install:

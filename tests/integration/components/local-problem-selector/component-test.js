@@ -28,5 +28,5 @@ test('it shows dir and file selector if problem was selected', function(assert) 
   this.render(hbs`{{local-problem-selector problems=problems selectedProblem=problem}}`);
 
   assert.equal(this.$(testSelector('dir')).text().trim(), '/aaa');
-  assert.equal(this.$(testSelector('file-selector')).text().trim(), 'No files available');
+  assert.equal(this.$(testSelector('no-files-msg')).text().trim(), 'No files available');
 });

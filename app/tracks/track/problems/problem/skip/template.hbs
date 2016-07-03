@@ -1,5 +1,9 @@
+<h3 class="ui dividing header">
+  Skip summary
+</h3>
+
 {{#if model.success}}
-<div class="ui positive message">
+<div class="ui positive compact message">
   <div class="content">
     <div class="header" data-test-skip-success>
       {{model.success}}
@@ -7,7 +11,7 @@
   </div>
 </div>
 {{else}}
-<div class="ui icon warning message">
+<div class="ui icon warning compact message">
   <i class="warning icon"></i>
   <div class="content">
     <div class="header" data-test-skip-error>

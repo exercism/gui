@@ -1,5 +1,5 @@
 {{#if noSubmissions}}
-<div class="ui yellow message">
+<div class="ui yellow compact message">
   <div class="header" data-test-message-empty>
   {{status.recent.problem}}
   </div>
@@ -17,10 +17,15 @@
     </div>
   </div>
   <div class="row">
-    <div class="ten wide column">
+    <div class="nine wide column">
       <h4 class="ui header">Submitted problems</h4>
-      <div class="ui three stackable cards" data-test-submitted>
-        {{#each status.submitted as |exercise|}}
+        {{#if (not status.submitted)}}
+          <p data-test-submitted-empty-msg>
+          None. Latest submission was probably deleted
+          </p>
+        {{else}}
+          <div class="ui three stackable cards" data-test-submitted>
+          {{#each status.submitted as |exercise|}}
             {{#link-to "tracks.track.status.submission"
               status.track_id exercise
               class="ui card"}}
@@ -28,10 +33,11 @@
                 {{exercise}}
               </div>
             {{/link-to}}
-        {{/each}}
-      </div>
+          {{/each}}
+          </div>
+        {{/if}}
     </div>
-    <div class="six wide column">
+    <div class="seven wide column">
       {{#pinned-content top=70}}
         {{yield}}
       {{/pinned-content}}
@@ -44,6 +50,10 @@
         {{#each status.skipped as |exercise|}}
           <div class="item">
             {{exercise}}
+          </div>
+        {{else}}
+          <div class="item" data-test-skipped-empty-msg>
+          None
           </div>
         {{/each}}
       </div>

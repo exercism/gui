@@ -5,7 +5,7 @@ export default function() {
 
   // Exercises API
   this.urlPrefix = 'http://x.exercism.io';
-  this.timing = 400;      // delay for each request, automatically set to 0 during testing
+  this.timing = 300;      // delay for each request, automatically set to 0 during testing
   this.get('/tracks');
   this.get('/tracks/:id');
 
@@ -89,9 +89,7 @@ export default function() {
   });
 
   this.post('user/assignments', (schema, request) => {
-    window.console.log(request.requestBody);
     const attrs = JSON.parse(request.requestBody);
-    window.console.log(attrs);
     let id = 'fakesubmissioon',
         submissionPath = `submissions/${id}`;
     let data = {

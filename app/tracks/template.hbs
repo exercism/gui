@@ -1,5 +1,27 @@
-{{track-selector
-    selectedTrack=selectedTrack
-    tracks=model
-    action=(route-action "showTrack") class="track-selector"}}
-{{outlet}}
+<div class="ui two column padded grid">
+  <div class="row">
+    <div class="three wide column">
+      <div class="ui fluid vertical compact menu">
+        <div class="header item">Track selection</div>
+        <div class="item">
+        {{track-selector
+            selectedTrack=selectedTrack
+            tracks=model
+            action=(route-action "showTrack") class="track-selector"}}
+        </div>
+        {{track-action-menu
+          track=selectedTrack
+          problemToSkip=null
+          open=(route-action "open")}}
+      </div>
+    </div>
+    <div class="thirteen wide column">
+      {{#if (not selectedTrack)}}
+      <div class="ui left pointing pink basic label">
+        Select a track from the menu to start
+      </div>
+      {{/if}}
+      {{outlet}}
+    </div>
+  </div>
+</div>

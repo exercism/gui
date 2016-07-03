@@ -16,6 +16,15 @@ moduleForComponent('track-action-menu', 'Integration | Component | track action 
   }
 });
 
+test('it disables actions if api track is null', function(assert) {
+  this.set('configuration.apiKey', 'aabbcc');
+  this.set('track', null);
+  this.render(hbs`{{track-action-menu track=track}}`);
+
+  assert.ok(this.$(testSelector('fetch-btn')).hasClass('disabled'));
+  assert.ok(this.$(testSelector('status-btn')).hasClass('disabled'));
+});
+
 test('it disables actions if api key is unset', function(assert) {
   this.set('track', {});
   this.render(hbs`{{track-action-menu track=track}}`);

@@ -3,7 +3,8 @@ import { Factory, faker } from 'ember-cli-mirage';
 const languages = [
   'C', 'C++', 'Elixir', 'Rust', 'Python',
   'Ruby', 'Bash', 'Elm', 'JavaScript', 'Go',
-  'Perl', 'Scala', 'Clojure', 'OCaml','PHP'
+  'Perl6', 'Scala', 'Clojure', 'OCaml','PHP',
+  'Lisp', 'Lua', 'Erlang'
 ];
 
 export default Factory.extend({
@@ -16,8 +17,12 @@ export default Factory.extend({
   slug(i) {
     return languages[i].toLowerCase();
   },
-  active() {
-    return faker.random.boolean();
+  active(i) {
+    let language = languages[i];
+    if (language.startsWith('L')) {
+      return false;
+    }
+    return true;
   },
   repository() {
     return faker.internet.url();

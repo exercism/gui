@@ -12,14 +12,32 @@ moduleFor('service:exercism', 'Unit | Service | exercism', {
 test('saveProblems makes track and problem dirs if dont exists', function(assert) {
   let service = this.subject();
   mockFs({ '/t': {} });
-  let problems = [{ slug: 'bob', language: 'elixir', files: {} }],
+  let problems = [{ slug: 'bob', language: 'elixir', files: { f1: 'aa' } }],
       summary = service.saveProblems(problems, '/t'),
       info = summary[0];
   assert.ok(fs.existsSync('/t/elixir/bob'));
   assert.equal(summary.length, 1);
   assert.equal(info.problem, 'bob');
-  assert.deepEqual(info.new, []);
+  assert.deepEqual(info.new, ['f1']);
   assert.deepEqual(info.unchanged, []);
+});
+
+test('saveProblems make dirs recursively', function(assert) {
+  let service = this.subject();
+  mockFs({ '/t': {} });
+  let problems = [{
+    slug: 'leap',
+    language: 'c',
+    files: {
+      'ex.c': 'content0',
+      'test/vendor/aaa.c': 'content1',
+      'nested-folder/bbb.c': 'content2'
+    }
+  }];
+  service.saveProblems(problems, '/t');
+  assert.ok(fs.existsSync('/t/c/leap/ex.c'));
+  assert.ok(fs.existsSync('/t/c/leap/test/vendor/aaa.c'));
+  assert.ok(fs.existsSync('/t/c/leap/nested-folder/bbb.c'));
 });
 
 test('saveProblems skips files that already exist and creates missing', function(assert) {
@@ -103,4 +121,22 @@ test('getLocalProblems lists all files in a dir and excludes tests and readme', 
     { name: 'hello-world', files: ['hello_world.ex'], dir: '/t/elixir/hello-world' }
   ];
   assert.deepEqual(problems, expected);
+});
+
+test('extracts details from path', function(assert) {
+  let service = this.subject(),
+      filePath = 'C:\\t\\elixir\\bob\\file.ex';
+  let { fileName, problem, language } = service._extractInfoFromFilePath(filePath, 'C:\\t', '\\');
+  assert.equal(fileName, 'file.ex');
+  assert.equal(problem, 'bob');
+  assert.equal(language, 'elixir');
+});
+
+test('extracts details from path with nested folders', function(assert) {
+  let service = this.subject(),
+      filePath = '/t/exercism/elixir/bob/nested/folder/file.ex';
+  let { fileName, problem, language } = service._extractInfoFromFilePath(filePath, '/t/exercism', '/');
+  assert.equal(fileName, 'file.ex');
+  assert.equal(problem, 'bob');
+  assert.equal(language, 'elixir');
 });

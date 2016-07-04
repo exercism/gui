@@ -1,7 +1,10 @@
 {{#if problem.files}}
 <div class="ui large form">
   <div class="grouped inline fields">
-    <h5 class="ui dividing header">Available files</h5>
+    <h5 class="ui dividing header">
+      Available files
+      <div class="sub header">note that README.md and test files are skipped from this list</div>
+    </h5>
     {{#each problem.files as |file|}}
     <div class="field" data-test-files>
       {{ui-radio name="selectedFile" value=file label=file current=selectedFile}}
@@ -16,5 +19,5 @@
   </button>
 </div>
 {{else}}
-  <p><strong data-test-no-files-msg>No files available</strong> (note that README.md and test files are skipped from this list)</p>
+  <p><strong data-test-no-files-msg>No files available</strong></p>
 {{/if}}

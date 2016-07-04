@@ -1,7 +1,7 @@
 {
   "name": "exercism-gui",
-  "version": "0.0.0",
-  "description": "Small description for exercism-gui goes here",
+  "version": "0.0.3",
+  "description": "A desktop app to fetch and submit exercism.io problems",
   "private": true,
   "directories": {
     "doc": "doc",

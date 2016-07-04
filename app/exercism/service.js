@@ -70,14 +70,13 @@ export default Ember.Service.extend({
       let slug = problem.slug,
           language = problem.language,
           dirPath = path.join(dir, language, slug),
-          dirExists = fs.existsSync(dirPath),
           summary = { problem: slug, new: [], unchanged: [] };
-      if (!dirExists) {
-        mkdirp.sync(dirPath);
-      }
 
       lodash.forEach(problem.files, (content, fileName) => {
         let filePath = path.join(dirPath, fileName);
+        // Make sure the dirs exists
+        mkdirp.sync(path.dirname(filePath));
+
         if (!fs.existsSync(filePath)) {
           fs.writeFileSync(filePath, content);
           summary.new.push(fileName);
@@ -140,16 +139,22 @@ export default Ember.Service.extend({
     return problems;
   },
 
+  _extractInfoFromFilePath(filePath, dir, sep=path.sep) {
+    let bits = filePath.replace(dir, '').split(sep),
+        language = bits[1],
+        problem = bits[2],
+        fileName = bits.slice(-1)[0];
+    return { fileName, problem, language };
+  },
+
   submit(filePath) {
     let key = this.get('configuration.apiKey'),
         api = this.get('configuration.api'),
         dir = this.get('configuration.dir'),
-        fileName = path.basename(filePath),
-        problem = path.basename(path.dirname(filePath)),
-        language = path.basename(path.dirname(path.dirname(filePath))),
         solutionString = fs.readFileSync(filePath, { encoding: 'utf-8' }),
         url = urlJoin(api, '/api/v1/user/assignments'),
         solution = {};
+    let { fileName, problem, language } = this._extractInfoFromFilePath(filePath, dir);
     solution[fileName] = solutionString;
     let payload = { key, dir, language, problem, solution, code: '' };
     let options = {

@@ -3,7 +3,7 @@
   <div class="row">
     <div class="six wide column">
       {{#power-select
-        options=problems
+        options=(sort-by "name" problems)
         selected=selectedProblem
         placeholder="Please, select a problem"
         onchange=(action (mut selectedProblem)) as |problem|}}

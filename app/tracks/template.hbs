@@ -7,7 +7,7 @@
         {{track-selector
             selectedTrack=selections.selectedTrack
             tracks=(sort-by "language" (filter-by "active" true model))
-            action=(route-action "showTrack") class="track-selector"}}
+            action=(route-action "showTrack")}}
         </div>
         {{track-action-menu
           track=selections.selectedTrack

@@ -13,14 +13,25 @@ export default Ember.Route.extend({
     this.set('selections.selectedTrack', model);
   },
 
+  refreshOrTransition(){
+    let [route, ...args] = arguments;
+    let currentRoute = getOwner(this).lookup('controller:application').currentRouteName;
+    if (currentRoute === route || currentRoute === `${route}.index`) {
+      window.console.info('Refreshing route', currentRoute);
+      this.send('refreshModel');
+    } else {
+      this.transitionTo(route, ...args);
+    }
+  },
+
   actions: {
     fetch() {
-      let currentRoute = getOwner(this).lookup('controller:application').currentRouteName;
-      if (currentRoute === 'tracks.track.fetch') {
-        this.send('reloadFetch');
-      } else {
-        this.transitionTo('tracks.track.fetch');
-      }
+      this.refreshOrTransition('tracks.track.fetch');
+    },
+
+    status(trackId) {
+      this.refreshOrTransition('tracks.track.status', trackId);
     }
+
   }
 });

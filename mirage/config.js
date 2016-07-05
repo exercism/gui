@@ -22,6 +22,7 @@ export default function() {
           files: {
               'problem.rs': 'problem',
               'problem_tests.rs': 'tests',
+              'nested/dir/file1': 'aaaa',
               'README.md': 'readme'
           },
           fresh: false
@@ -93,7 +94,7 @@ export default function() {
     if (attrs.language === 'bash') {
       return new Response(400, {}, { error: 'duplicate of previous iteration' });
     }
-    if (attrs.language === 'perl') {
+    if (attrs.language === 'perl6') {
       return new Response(500, {}, { error: ['some error'] });
     }
     let id = faker.random.uuid(),

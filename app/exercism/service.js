@@ -122,7 +122,7 @@ export default Ember.Service.extend({
   _getProblemFiles(dir) {
     return fs.readdirSync(dir).filter((file) => {
       let fpath = path.join(dir, file);
-      return fs.statSync(fpath).isFile() && file !== 'README.md' && !file.includes('test');
+      return fs.statSync(fpath).isFile() && file !== 'README.md' && !file.toLowerCase().includes('test');
     });
   },
 

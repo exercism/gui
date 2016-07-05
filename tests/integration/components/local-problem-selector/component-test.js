@@ -13,7 +13,7 @@ test('it shows a message if problems is an empty list', function(assert) {
   assert.equal(this.$(testSelector('no-problems-msg')).text().trim(), 'No problem files found under this track');
 });
 
-test('it shows no files or dir if problem was selected', function(assert) {
+test('it shows no files or dir if problem was not selected', function(assert) {
   this.set('problems', [ { name: 'bob', files: [], dir: '/aaa' } ]);
   this.render(hbs`{{local-problem-selector problems=problems}}`);
 
@@ -28,5 +28,5 @@ test('it shows dir and file selector if problem was selected', function(assert) 
   this.render(hbs`{{local-problem-selector problems=problems selectedProblem=problem}}`);
 
   assert.equal(this.$(testSelector('dir')).text().trim(), '/aaa');
-  assert.equal(this.$(testSelector('no-files-msg')).text().trim(), 'No files available');
+  assert.equal(this.$(testSelector('no-files-msg')).text().trim(), 'None');
 });

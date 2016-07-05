@@ -1,48 +1,45 @@
-<div class="header item">Actions</div>
-{{#if apiKeyUnset}}
-  {{#link-to "configuration" class="item"}}
-    <p>Please configure your API key to enable these actions</p>
-  {{/link-to}}
-{{/if}}
+<div class="item header">Links</div>
+{{link-to 'Submitting' 'tracks.track.local-problems' track.id class="item"}}
 <div class="item">
-  <div
-    data-test-fetch-btn
-    {{action (route-action 'fetch')}}
-    class="{{buttonClass}}">
-    Fetch
-  </div>
-</div>
-<div class="item">
-  <div
-    data-test-status-btn
-    {{action (transition-to 'tracks.track.status' track.id)}}
-    class="{{buttonClass}}">
-    Status
-  </div>
-</div>
-<div class="item">
-  <div
-    data-test-submitting-btn
-    {{action (transition-to 'tracks.track.local-problems' track.id)}}
-    class="{{buttonClass}}">
-    Submitting
-  </div>
-</div>
-<div class="item">
-  {{#power-select
-    class="ui dropdown"
-    options=track.problems
-    selected=problemToSkip
-    placeholder="Select a problem"
-    onchange=(action (mut problemToSkip)) as |problem|}}
-    {{problem}}
-  {{/power-select}}
-  <div class="item">
-    <div
-      data-test-status-skip
-       class="{{buttonClass}} {{if (not problemToSkip) 'disabled' ''}}"
-      {{action (transition-to 'tracks.track.problems.problem.skip' problemToSkip)}}>
-      Skip
+  <b>Actions</b>
+  <div class="menu">
+  {{#if apiKeyUnset}}
+    {{#link-to "configuration" class="item"}}
+      Please configure your API key to enable these actions
+    {{/link-to}}
+  {{/if}}
+    <div class="item">
+      <div
+        data-test-fetch-btn
+        {{action (route-action 'fetch')}}
+        class="{{buttonClass}}">
+        Fetch
+      </div>
+    </div>
+    <div class="item">
+      <div
+        data-test-status-btn
+        {{action (route-action 'status' track.id)}}
+        class="{{buttonClass}}">
+        Status
+      </div>
+    </div>
+    <div class="item">
+      {{#power-select
+        options=track.problems
+        selected=problemToSkip
+        placeholder="Select a problem to skip"
+        onchange=(action (mut problemToSkip)) as |problem|}}
+        {{problem}}
+      {{/power-select}}
+      <div class="item">
+        <div
+          data-test-status-skip
+          class="{{buttonClass}} {{if (not problemToSkip) 'disabled' ''}}"
+          {{action (transition-to 'tracks.track.problems.problem.skip' problemToSkip)}}>
+          Skip
+        </div>
+      </div>
     </div>
   </div>
 </div>

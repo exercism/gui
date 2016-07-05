@@ -9,7 +9,7 @@ export default Ember.Route.extend({
   },
 
   actions: {
-    reloadFetch() {
+    refreshModel() {
       this.refresh();
     }
   }

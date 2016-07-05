@@ -106,7 +106,9 @@ test('getLocalProblems lists all files in a dir and excludes tests and readme', 
     '/t/elixir': {
       'bob': {
         'bob.ex': 'a',
-        'some_file': 'b'
+        'some_file': 'b',
+        'test_bob.ex': 'c',
+        'bobTest.ex': 'd'
       },
       'hello-world': {
         'hello_world.ex': 'a',

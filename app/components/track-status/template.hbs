@@ -1,7 +1,11 @@
 {{#if noSubmissions}}
-<div class="ui yellow compact message">
-  <div class="header" data-test-message-empty>
-  {{status.recent.problem}}
+<div class="ui centered two column grid">
+  <div class="column">
+    <div class="ui yellow message">
+      <div class="header" data-test-message-empty>
+      {{status.recent.problem}}
+      </div>
+    </div>
   </div>
 </div>
 {{else}}

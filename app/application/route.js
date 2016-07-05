@@ -16,4 +16,9 @@ window.addEventListener('contextmenu', (e) => {
 }, false);
 
 export default Ember.Route.extend({
+  actions: {
+    refreshModel() {
+      this.refresh();
+    }
+  }
 });

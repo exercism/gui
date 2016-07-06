@@ -5,7 +5,7 @@ export default Ember.Route.extend({
 
   model() {
     let trackId = this.paramsFor('tracks.track').track_id;
-    return this.get('exercism').getStatus(trackId);
+    return this.store.findRecord('status', trackId);
   },
 
   actions: {

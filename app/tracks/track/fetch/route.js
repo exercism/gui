@@ -5,7 +5,9 @@ export default Ember.Route.extend({
 
   model() {
     let trackId = this.paramsFor('tracks.track').track_id;
-    return this.get('exercism').fetchAndSaveProblems(trackId);
+    return this.store.query('problem', { track_id: trackId }).then((problems) => {
+      return this.get('exercism').saveProblems(problems);
+    });
   },
 
   actions: {

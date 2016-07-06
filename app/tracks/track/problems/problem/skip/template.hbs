@@ -3,24 +3,13 @@
 </h3>
 <div class="ui centered two column grid">
   <div class="column">
-    {{#if model.success}}
     <div class="ui positive message">
       <div class="content">
         <div class="header" data-test-skip-success>
-          {{model.success}}
+          Skipped {{model.slug}} in track {{model.track}}
         </div>
       </div>
     </div>
-    {{else}}
-    <div class="ui icon warning message">
-      <i class="warning icon"></i>
-      <div class="content">
-        <div class="header" data-test-skip-error>
-          {{model.error}}
-        </div>
-      </div>
-    </div>
-    {{/if}}
   </div>
 </div>
 

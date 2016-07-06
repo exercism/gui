@@ -3,13 +3,23 @@ import Ember from 'ember';
 export default Ember.Route.extend({
   exercism: Ember.inject.service(),
   model(params) {
-    let filePath = atob(params.path);
-    return this.get('exercism').submit(filePath).then((status) => {
-      status.submittedFile = filePath;
-      if (status.error) {
-        return status;
+    let filePath = atob(params.path),
+        props = this.get('exercism').getSubmitPayload(filePath),
+        submission = this.store.createRecord('submission');
+    return submission.submit(props).then((response) => {
+      return {
+        url: response.url,
+        submittedFile: filePath,
+        iteration: response.iteration
+      };
+    }, (error) => {
+      if (error.errors[0].status === '400') {
+        return {
+          error: error.errors[0].detail,
+          submittedFile: filePath
+        };
       }
-      return { success: status };
+      throw error;
     });
   }
 

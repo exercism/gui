@@ -59,20 +59,6 @@ test('it shows submission link at submission route', function(assert) {
   });
 });
 
-test('it shows no submission message if 404', function(assert) {
-  let slug = 'bob',
-      trackId = 'elixir',
-      error = `No solutions found for "${slug}"`;
-
-  server.create('track', { id: trackId });
-  server.get(`http://exercism.io/api/v1/submissions/${trackId}/${slug}`, { error }, 404);
-  visit(`/tracks/${trackId}/status/submission/${slug}`);
-
-  andThen(function() {
-    assert.equal(find(testSelector('submission-header')).text().trim(), error);
-  });
-});
-
 test('it redirect to status when clicking on status button', function(assert) {
   let lang = 'elixir';
   server.create('track', { id: lang });

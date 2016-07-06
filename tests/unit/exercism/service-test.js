@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import { moduleFor, test } from 'ember-qunit';
 
 let fs = requireNode('fs'),
@@ -11,9 +12,15 @@ moduleFor('service:exercism', 'Unit | Service | exercism', {
 
 test('saveProblems makes track and problem dirs if dont exists', function(assert) {
   let service = this.subject();
+  service.configuration = { dir: '/t' };
   mockFs({ '/t': {} });
-  let problems = [{ slug: 'bob', language: 'elixir', files: { f1: 'aa' } }],
-      summary = service.saveProblems(problems, '/t'),
+  let Problem = Ember.Object.extend({
+        slug: 'bob',
+        language: 'elixir',
+        files: { f1: 'aa' }
+      }),
+      problems = [Problem.create()],
+      summary = service.saveProblems(problems),
       info = summary[0];
   assert.ok(fs.existsSync('/t/elixir/bob'));
   assert.equal(summary.length, 1);
@@ -24,16 +31,18 @@ test('saveProblems makes track and problem dirs if dont exists', function(assert
 
 test('saveProblems make dirs recursively', function(assert) {
   let service = this.subject();
+  service.configuration = { dir: '/t' };
   mockFs({ '/t': {} });
-  let problems = [{
-    slug: 'leap',
-    language: 'c',
-    files: {
-      'ex.c': 'content0',
-      'test/vendor/aaa.c': 'content1',
-      'nested-folder/bbb.c': 'content2'
-    }
-  }];
+  let Problem = Ember.Object.extend({
+        slug: 'leap',
+        language: 'c',
+        files: {
+          'ex.c': 'content0',
+          'test/vendor/aaa.c': 'content1',
+          'nested-folder/bbb.c': 'content2'
+        }
+      }),
+      problems = [Problem.create()];
   service.saveProblems(problems, '/t');
   assert.ok(fs.existsSync('/t/c/leap/ex.c'));
   assert.ok(fs.existsSync('/t/c/leap/test/vendor/aaa.c'));
@@ -42,13 +51,15 @@ test('saveProblems make dirs recursively', function(assert) {
 
 test('saveProblems skips files that already exist and creates missing', function(assert) {
   let service = this.subject();
+  service.configuration = { dir: '/t' };
   mockFs({ '/t/elixir/bob': { 'problem.ex': 'old_content' } });
-  let problems = [{
-    slug: 'bob',
-    language: 'elixir',
-    files: {'problem.ex': 'new_content', 'problem_test.ex': 'b'}
-  }];
-  let summary = service.saveProblems(problems, '/t'),
+  let Problem = Ember.Object.extend({
+        slug: 'bob',
+        language: 'elixir',
+        files: {'problem.ex': 'new_content', 'problem_test.ex': 'b'}
+      }),
+      problems = [Problem.create()],
+      summary = service.saveProblems(problems, '/t'),
       info = summary[0];
   assert.equal(summary.length, 1);
   assert.ok(fs.existsSync('/t/elixir/bob/problem_test.ex'));

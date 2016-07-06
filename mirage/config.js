@@ -3,10 +3,13 @@ import { faker, Response } from 'ember-cli-mirage';
 
 export default function() {
 
-  // Exercises API
-  this.urlPrefix = 'http://x.exercism.io';
   this.timing = 300;      // delay for each request, automatically set to 0 during testing
+
+  // Exercises API host
+  this.urlPrefix = 'http://x.exercism.io';
+
   this.get('/tracks');
+
   this.get('/tracks/:id');
 
   this.get('/v2/exercises/:track', (schema, request) => {
@@ -15,42 +18,24 @@ export default function() {
 
     return {
       problems: [{
-          track_id: track,
-          language: track,
-          slug: slug,
-          name: Ember.String.capitalize(slug),
-          files: {
-              'problem.rs': 'problem',
-              'problem_tests.rs': 'tests',
-              'nested/dir/file1': 'aaaa',
-              'README.md': 'readme'
-          },
-          fresh: false
+        id: 'fake',
+        track_id: track,
+        language: track,
+        slug: slug,
+        name: Ember.String.capitalize(slug),
+        files: {
+            'problem.rs': 'problem',
+            'problem_tests.rs': 'tests',
+            'nested/dir/file1': 'aaaa',
+            'README.md': 'readme'
+        },
+        fresh: false
       }]
     };
+
   });
 
-  this.get('/v2/exercises/:track/:slug', (schema, request) => {
-    let track = request.params.track,
-        slug = request.params.slug;
-
-    return {
-      problems: [{
-          track_id: track,
-          language: track,
-          slug: slug,
-          name: Ember.String.capitalize(slug),
-          files: {
-              'problem.rs': 'problem',
-              'problem_tests.rs': 'tests',
-              'README.md': 'readme'
-          },
-          fresh: false
-      }]
-    };
-  });
-
-  // Exercism API
+  // Exercism API host
   this.urlPrefix = 'http://exercism.io';
   this.namespace = 'api/v1';
 
@@ -63,7 +48,9 @@ export default function() {
                   .toLowerCase()
                   .split(' '),
         problem = (id.indexOf('c')) ? submitted[0] : "You haven't submitted any solutions yet";
-    let hash = {
+
+    return {
+      id,
       track_id: id,
       recent: {
         problem,
@@ -72,7 +59,7 @@ export default function() {
       submitted,
       skipped,
     };
-    return hash;
+
   });
 
   this.get('submissions/:track/:slug', (schema, request) => {
@@ -95,7 +82,7 @@ export default function() {
       return new Response(400, {}, { error: 'duplicate of previous iteration' });
     }
     if (attrs.language === 'perl6') {
-      return new Response(500, {}, { error: ['some error'] });
+      return new Response(500, {}, { errors: ['some error'] });
     }
     let id = faker.random.uuid(),
         submissionPath = `submissions/${id}`;

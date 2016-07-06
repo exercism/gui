@@ -13,14 +13,3 @@ test('it skips a problem', function(assert) {
     assert.equal(find(testSelector('skip-success')).text().trim(), expected);
   });
 });
-
-test('it shows an error is no such slug', function(assert) {
-  let error = 'Exercise "aaa" in language "elixir" doesn\'t exist. Maybe you mispelled it?';
-  server.post('iterations/elixir/aaa/skip', { error }, 404);
-  visit('/tracks/elixir/problems/aaa/skip');
-
-  andThen(function() {
-    assert.equal(currentURL(), '/tracks/elixir/problems/aaa/skip');
-    assert.equal(find(testSelector('skip-error')).text().trim(), error);
-  });
-});

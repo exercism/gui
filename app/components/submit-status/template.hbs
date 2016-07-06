@@ -1,16 +1,23 @@
-{{#if status.error}}
-<div class="ui negative message">
-  <div class="header" data-test-error-msg>
-  {{status.error}}
+<div class="ui {{if status.error 'negative' 'positive'}} icon message">
+  <i class="{{if status.error 'warning' 'file'}} icon"></i>
+  <div class="content">
+    <div class="header" data-test-msg>
+      {{#if status.error}}
+        <p data-test-error-msg>{{status.error}}</p>
+      {{else}}
+        <p data-test-success-msg>file submitted succesfully</p>
+      {{/if}}
+    </div>
+    {{#if status.error}}
+      <p data-test-submitted-file>Submitted file was <strong>{{status.submittedFile}}</strong></p>
+    {{else}}
+      <ul class="list">
+        <li data-test-url>Link to submission: <a href="{{status.url}}">{{status.url}}</a></li>
+        <li data-test-submitted-file>File: <strong>{{status.submittedFile}}</strong></li>
+        <li data-test-iteration>
+          Iteration number: <strong>{{status.iteration}}</strong>
+        </li>
+      </ul>
+    {{/if}}
   </div>
-  <p>Submitted file was {{status.submittedFile}}</p>
 </div>
-{{else}}
-<div class="ui positive message">
-  <div class="header" data-test-success-msg>
-  File {{status.success.submittedFile}} submitted succesfully
-  </div>
-  <p data-test-iteration>Iteration number {{status.success.iteration}}</p>
-</div>
-{{/if}}
-

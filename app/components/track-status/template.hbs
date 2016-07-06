@@ -31,7 +31,7 @@
           <div class="ui three stackable cards" data-test-submitted>
           {{#each status.submitted as |exercise|}}
             {{#link-to "tracks.track.status.submission"
-              status.track_id exercise
+              status.trackId exercise
               class="ui card"}}
               <div class="content">
                 {{exercise}}

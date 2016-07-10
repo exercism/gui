@@ -35,6 +35,27 @@ export default function() {
 
   });
 
+  this.get('/v2/exercises/restore', () => {
+    let track = 'elixir',
+        slug = 'exercism-gui-fake-problem';
+
+    return {
+      problems: [{
+        id: 'fake',
+        track_id: track,
+        language: track,
+        slug: slug,
+        name: Ember.String.capitalize(slug),
+        files: {
+            'problem.ex': 'problem',
+            'README.md': 'readme'
+        },
+        fresh: false
+      }]
+    };
+
+  });
+
   // Exercism API host
   this.urlPrefix = 'http://exercism.io';
   this.namespace = 'api/v1';

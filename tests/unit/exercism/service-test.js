@@ -29,6 +29,19 @@ test('saveProblems makes track and problem dirs if dont exists', function(assert
   assert.deepEqual(info.unchanged, []);
 });
 
+test('saveProblems creates exercism folder if it does not exists', function(assert) {
+  let service = this.subject();
+  service.configuration = { dir: '/home/t' };
+  mockFs({ '/home': {} });
+  let problems = [{
+    slug: 'leap',
+    language: 'c',
+    files: { 'ex.c': 'content0' }
+  }];
+  service.saveProblems(problems, '/t');
+  assert.equal(fs.readFileSync('/home/t/c/leap/ex.c').toString(), 'content0');
+});
+
 test('saveProblems make dirs recursively', function(assert) {
   let service = this.subject();
   service.configuration = { dir: '/t' };

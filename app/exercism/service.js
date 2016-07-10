@@ -1,5 +1,7 @@
 import Ember from 'ember';
 
+const { get } = Ember;
+
 const fs = requireNode('fs'),
       mkdirp = requireNode('mkdirp'),
       path = requireNode('path'),
@@ -14,13 +16,14 @@ export default Ember.Service.extend({
         dir = this.get('configuration.dir');
 
     problems.forEach((problem) => {
-      let slug = problem.get('slug'),
-          language = problem.get('language'),
+      let slug = get(problem, 'slug'),
+          language = get(problem, 'language'),
           dirPath = path.join(dir, language, slug),
           summary = { problem: slug, new: [], unchanged: [] };
 
-      lodash.forEach(problem.get('files'), (content, fileName) => {
+      lodash.forEach(get(problem, 'files'), (content, fileName) => {
         let filePath = path.join(dirPath, fileName);
+
         // Make sure the dirs exists
         mkdirp.sync(path.dirname(filePath));
 
@@ -31,22 +34,28 @@ export default Ember.Service.extend({
           summary.unchanged.push(fileName);
         }
       });
+
       problemsSaved.push(summary);
     });
+
     return problemsSaved;
   },
 
   _getValidLocalDirs(root, validSlugs) {
     let dirs = [];
+
     if (!fs.existsSync(root) || !fs.statSync(root).isDirectory()) {
       return dirs;
     }
+
     lodash.forEach(fs.readdirSync(root), (file) => {
       let fpath = path.join(root, file);
+
       if (fs.statSync(fpath).isDirectory() && validSlugs.contains(file)) {
         dirs.push(fpath);
       }
     });
+
     return dirs;
   },
 
@@ -69,6 +78,7 @@ export default Ember.Service.extend({
     lodash.forEach(dirs, (dir) => {
       let files = this._getProblemFiles(dir),
           name = path.basename(dir);
+
       problems.push({ name, files, dir });
     });
 
@@ -95,4 +105,5 @@ export default Ember.Service.extend({
 
     return { key, dir, language, problem, solution, code };
   }
+
 });

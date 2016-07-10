@@ -21,6 +21,7 @@ Router.map(function() {
       });
       this.route('local-problems');
       this.route('local-problems.submit', { path: 'local-problems/:path/submit' });
+      this.route('restore');
     });
   });
   this.route('configuration');

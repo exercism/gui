@@ -31,6 +31,10 @@ export default Ember.Route.extend({
 
     status(trackId) {
       this.refreshOrTransition('tracks.track.status', trackId);
+    },
+
+    restore() {
+      this.refreshOrTransition('tracks.track.restore');
     }
 
   }

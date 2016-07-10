@@ -18,6 +18,14 @@
     </div>
     <div class="item">
       <div
+        data-test-fetch-btn
+        {{action (route-action 'restore')}}
+        class="{{buttonClass}}">
+        Restore
+      </div>
+    </div>
+    <div class="item">
+      <div
         data-test-status-btn
         {{action (route-action 'status' track.id)}}
         class="{{buttonClass}}">

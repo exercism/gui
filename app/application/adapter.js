@@ -43,6 +43,10 @@ export default ActiveModelAdapter.extend({
   },
 
   buildURL(modelName, id, snapshot, requestType, query) {
+    if (requestType === 'GET' && modelName === 'problem') {
+      // Restore problems
+      return urlJoin(this.get('configuration.xapi'), `/v2/exercises/`);
+    }
     if (requestType === 'POST' && modelName === 'problem') {
       // Skip problem
       let track = snapshot.attr('trackId'),

@@ -1,6 +1,6 @@
 import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
-import { memberAction } from 'ember-api-actions';
+import { memberAction, classOp } from 'ember-api-actions';
 
 export default Model.extend({
 
@@ -10,6 +10,7 @@ export default Model.extend({
   name: attr('string'),
   files: attr(),
   fresh: attr('boolean'),
-  skip: memberAction({ path: 'skip', type: 'post' })
+  skip: memberAction({ path: 'skip', type: 'post' }),
+  restoreAll: classOp({ path: 'restore', type: 'get' })
 
 });

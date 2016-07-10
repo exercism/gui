@@ -6,6 +6,5 @@ export default Ember.Route.extend({
   model(params) {
     let trackId = this.paramsFor('tracks.track').track_id;
     return this.store.queryRecord('submission', { track_id: trackId, slug: params.slug });
-    //return this.get('exercism').getLatestSubmission(trackId, params.slug);
   }
 });

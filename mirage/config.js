@@ -6,6 +6,7 @@ export default function() {
   this.timing = 300;      // delay for each request, automatically set to 0 during testing
 
   // Exercises API host
+  // -------------------
   this.urlPrefix = 'http://x.exercism.io';
 
   this.get('/tracks');
@@ -13,74 +14,23 @@ export default function() {
   this.get('/tracks/:id');
 
   this.get('/v2/exercises/:track', (schema, request) => {
-    let track = request.params.track,
-        slug = 'exercism-gui-fake-problem';
-
-    return {
-      problems: [{
-        id: 'fake',
-        track_id: track,
-        language: track,
-        slug: slug,
-        name: Ember.String.capitalize(slug),
-        files: {
-            'problem.rs': 'problem',
-            'problem_tests.rs': 'tests',
-            'nested/dir/file1': 'aaaa',
-            'README.md': 'readme'
-        },
-        fresh: false
-      }]
-    };
-
+    let problems = [schema.problems.find(request.params.track)];
+    return { problems };
   });
 
-  this.get('/v2/exercises/restore', () => {
-    let track = 'elixir',
-        slug = 'exercism-gui-fake-problem';
-
-    return {
-      problems: [{
-        id: 'fake',
-        track_id: track,
-        language: track,
-        slug: slug,
-        name: Ember.String.capitalize(slug),
-        files: {
-            'problem.ex': 'problem',
-            'README.md': 'readme'
-        },
-        fresh: false
-      }]
-    };
-
+  this.get('/v2/exercises/restore', (schema) => {
+    let ids = ['elixir', 'python', 'rust', 'erlang'],
+        problems = schema.problems.find(ids).models;
+    return { problems };
   });
 
   // Exercism API host
+  // -----------------
   this.urlPrefix = 'http://exercism.io';
   this.namespace = 'api/v1';
 
   this.get('tracks/:id/status', (schema, request) => {
-    let id = request.params.id,
-        submitted = faker.random.words(faker.random.number({ min: 1, max: 60 }))
-                    .toLowerCase()
-                    .split(' '),
-        skipped = faker.random.words(faker.random.number({ max: 20 }))
-                  .toLowerCase()
-                  .split(' '),
-        problem = (id.indexOf('c')) ? submitted[0] : "You haven't submitted any solutions yet";
-
-    return {
-      id,
-      track_id: id,
-      recent: {
-        problem,
-        submitted_at: faker.date.recent()
-      },
-      submitted,
-      skipped,
-    };
-
+    return schema.statuses.find(request.params.id);
   });
 
   this.get('submissions/:track/:slug', (schema, request) => {

@@ -1,11 +1,6 @@
 import { Factory, faker } from 'ember-cli-mirage';
+import languages from 'exercism-gui/mirage/factories/languages';
 
-const languages = [
-  'C', 'C++', 'Elixir', 'Rust', 'Python',
-  'Ruby', 'Bash', 'Elm', 'JavaScript', 'Go',
-  'Perl6', 'Scala', 'Clojure', 'OCaml','PHP',
-  'Lisp', 'Lua', 'Erlang'
-];
 
 export default Factory.extend({
   id(i) {

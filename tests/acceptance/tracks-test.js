@@ -47,6 +47,9 @@ test('it shows submission link at submission route', function(assert) {
       url = 'http://exercism.io/submissions/fake';
 
   server.create('track', { id: trackId });
+  let recent = { problem: slug, submitted_at: null };
+  server.create('status', { id: trackId, recent });
+
   server.get(
     `http://exercism.io/api/v1/submissions/${trackId}/${slug}`,
     { slug, url, track_id: trackId });
@@ -54,6 +57,7 @@ test('it shows submission link at submission route', function(assert) {
 
   andThen(function() {
     let expected = `Link to latest submission for "${slug}"`;
+    assert.equal(currentURL(), `/tracks/${trackId}/status/submission/${slug}`);
     assert.equal(find(testSelector('submission-header')).text().trim(), expected);
     assert.equal(find(testSelector('submission-link')).text().trim(), url);
   });
@@ -62,6 +66,7 @@ test('it shows submission link at submission route', function(assert) {
 test('it redirect to status when clicking on status button', function(assert) {
   let lang = 'elixir';
   server.create('track', { id: lang });
+  server.create('status', { id: lang });
 
   visit(`/tracks/${lang}`);
   andThen(function() {

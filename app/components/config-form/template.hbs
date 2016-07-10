@@ -21,10 +21,11 @@
     {{/if}}
   </div>
   <div class="field {{if validations.attrs.apiKey.isValid '' 'error'}}">
-    <label>API key</label>
+    <label>API key
     {{#if (not apiKey)}}
       (see <a href="http://exercism.io/account/key">http://exercism.io/account/key</a>)
     {{/if}}
+    </label>
     <input
       type="text"
       value={{apiKey}}

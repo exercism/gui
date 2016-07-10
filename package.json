@@ -106,6 +106,7 @@
     }
   },
   "dependencies": {
+    "electron-localshortcut": "^0.6.1",
     "jsonfile": "^2.3.1",
     "lodash": "^4.13.1",
     "mkdirp": "^0.5.1",

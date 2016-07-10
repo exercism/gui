@@ -1,3 +1,4 @@
+{{context-menu}}
 <div class="ui inverted top fixed menu">
   <div class="container">
     {{#link-to "index" class="item"}}
@@ -7,6 +8,10 @@
     {{link-to "Tracks" "tracks" class="item"}}
   </div>
   <div class="right menu">
+  <div class="ui simple dropdown icon item">
+    <i class="desktop icon"></i>
+    {{window-menu}}
+  </div>
   </div>
 </div>
 

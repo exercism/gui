@@ -5,8 +5,9 @@ const electron             = require('electron');
 const path                 = require('path');
 const {app, BrowserWindow} = electron;
 const dirname              = __dirname || path.resolve(path.dirname());
-const emberAppLocation     = `file://${__dirname}/dist/index.html`;
+const emberAppLocation     = `file://${dirname}/dist/index.html`;
 const shell                = electron.shell;
+const localshortcut        = require('electron-localshortcut');
 
 let mainWindow = null;
 
@@ -33,6 +34,8 @@ app.on('ready', function onReady() {
       width: 1024,
       height: 768
     });
+
+    mainWindow.setMenu(null);
 
     mainWindow.maximize();
 
@@ -104,4 +107,16 @@ app.on('ready', function onReady() {
     mainWindow.webContents.on('will-navigate', handleRedirect);
     mainWindow.webContents.on('new-window', handleRedirect);
 
+    // Shortcuts
+    localshortcut.register(mainWindow, 'F11', () => {
+      mainWindow.setFullScreen(!mainWindow.isFullScreen());
+    });
+
+    localshortcut.register(mainWindow, 'Shift+CmdOrCtrl+I', () => {
+      mainWindow.webContents.toggleDevTools();
+    });
+
+    localshortcut.register(mainWindow, 'CmdOrCtrl+R', () => {
+      mainWindow.reload();
+    });
 });

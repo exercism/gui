@@ -1,20 +1,19 @@
 {{#if summary}}
-  <div class="ui two column centered grid">
-    <div class="column">
-  <div class="ui info message">
-    <p>
-      Please note that existing files are <strong>not</strong> overwritten
-    </p>
-  </div>
+<div class="ui two column centered grid">
+  <div class="column">
+    <div class="ui info message">
+      <p>
+        Please note that existing files are <strong>not</strong> overwritten
+      </p>
     </div>
   </div>
-
-  <br>
-  {{fetch-summary summary=summary}}
+</div>
+<br>
+{{fetch-summary summary=summary}}
 {{else}}
-  <div class="ui info message">
-    <p>
+<div class="ui info big message">
+  <p>
     No files were submitted under this track yet. Nothing to restore.
-    </p>
-  </div>
+  </p>
+</div>
 {{/if}}

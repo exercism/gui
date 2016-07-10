@@ -7,6 +7,7 @@ const fs = requireNode('fs'),
 export default Ember.Component.extend({
   selectedFile: null,
   errorMessage: null,
+  refreshing: false,
 
   change() {
     this.set('errorMessage', null);
@@ -32,6 +33,16 @@ export default Ember.Component.extend({
       this.handleAction((filePath) => {
         electron.shell.openItem(filePath);
       });
+    },
+
+    refresh() {
+      this.set('refreshing', true);
+      this.attrs.refresh();
+      Ember.run.later(() => {
+        // We wait a little since usually the response
+        // is very fast and the visual feedback is lost
+        this.set('refreshing', false);
+      }, 300);
     }
   }
 });

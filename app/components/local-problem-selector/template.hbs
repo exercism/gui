@@ -24,7 +24,10 @@
   <div class="row">
     <div class="sixteen wide column" data-test-file-selector>
     {{#if selectedProblem}}
-      {{file-selector problem=selectedProblem submit=(route-action 'submit')}}
+      {{file-selector
+          problem=selectedProblem
+          submit=(route-action "submit")
+          refresh=(route-action "refreshModel")}}
     {{/if}}
     </div>
   </div>

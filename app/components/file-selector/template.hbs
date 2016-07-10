@@ -23,8 +23,8 @@
       Open
   </button>
   <button
-    class="ui blue basic icon button"
-    {{action (route-action "refreshModel")}}>
+    class="ui blue basic icon {{if refreshing 'loading'}} button"
+    {{action "refresh"}}>
     <i class="refresh icon"></i>
   </button>
   {{#if errorMessage}}

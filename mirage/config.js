@@ -19,7 +19,7 @@ export default function() {
   });
 
   this.get('/v2/exercises/restore', (schema) => {
-    let ids = ['elixir', 'python', 'rust', 'erlang'],
+    let ids = ['elixir', 'elixir2', 'python', 'rust', 'erlang'],
         problems = schema.problems.find(ids).models;
     return { problems };
   });

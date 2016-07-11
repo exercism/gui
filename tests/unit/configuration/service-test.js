@@ -59,3 +59,28 @@ test('it writes config file', function(assert) {
   assert.deepEqual(JSON.parse(fs.readFileSync(fakePath)), config);
   assert.equal(service.api, config.api);
 });
+
+test('isConfigured returns false only if API key is empty', function(assert) {
+  let config = {
+        api: 'http://exercism',
+        xapi: 'http://x.exercism',
+        dir: '/home/fake/exercises',
+      };
+
+  mockFs({ '/home/fake/e.json': JSON.stringify(config) });
+  let service = this.subject();
+
+  assert.notOk(service.get('isConfigured'));
+
+  config.apiKey = null;
+  service.update(config);
+  assert.notOk(service.get('isConfigured'));
+
+  config.apiKey = '';
+  service.update(config);
+  assert.notOk(service.get('isConfigured'));
+
+  config.apiKey = 'somekey';
+  service.update(config);
+  assert.ok(service.get('isConfigured'));
+});

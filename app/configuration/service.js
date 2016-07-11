@@ -12,21 +12,22 @@ export default Ember.Service.extend({
     this.update(config);
   },
 
+  isConfigured: Ember.computed.notEmpty('apiKey'),
+
   getHomeConfigFilePath() {
     return path.join(osHomedir(), '.exercism.json');
   },
 
   getHomeExercisesDir() {
     return path.join(osHomedir(), 'exercism');
-
   },
 
   getDefaults() {
-      return {
-        api: 'http://exercism.io',
-        xapi: 'http://x.exercism.io',
-        apiKey: null,
-        dir: this.getHomeExercisesDir(),
+    return {
+      api: 'http://exercism.io',
+      xapi: 'http://x.exercism.io',
+      apiKey: null,
+      dir: this.getHomeExercisesDir(),
     };
   },
 

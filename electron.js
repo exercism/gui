@@ -32,7 +32,8 @@ app.on('ready', function onReady() {
       minWidth: 1024,
       minHeight: 768,
       width: 1024,
-      height: 768
+      height: 768,
+      icon: 'public/assets/icons/linux.png'
     });
 
     mainWindow.setMenu(null);

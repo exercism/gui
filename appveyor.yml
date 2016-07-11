@@ -23,7 +23,7 @@ install:
 build_script:
   - node --version
   - IF %PLATFORM% EQU x64 (SET package_arch=x64) ELSE (SET package_arch=ia32)
-  - node node_modules\ember-cli\bin\ember electron:package --platform win32 --arch %package_arch%
+  - node node_modules\ember-cli\bin\ember electron:package --platform win32 --arch %package_arch% --icon public/assets/icons/win32.ico
 
 after_build:
   - 7z a electron-builds\exercism-gui-win32-%PLATFORM%-%APPVEYOR_REPO_TAG_NAME%.zip electron-builds\exercism-gui-win32-%package_arch%

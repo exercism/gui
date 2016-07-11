@@ -18,6 +18,11 @@ export default function() {
     return { problems };
   });
 
+  this.get('/v2/exercises/:track/:slug', (schema, request) => {
+    let problems = [schema.problems.find(request.params.track)];
+    return { problems };
+  });
+
   this.get('/v2/exercises/restore', (schema) => {
     let ids = ['elixir', 'elixir2', 'python', 'rust', 'erlang'],
         problems = schema.problems.find(ids).models;

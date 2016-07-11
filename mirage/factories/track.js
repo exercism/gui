@@ -26,7 +26,7 @@ export default Factory.extend({
     return [];
   },
   problems() {
-    const length = faker.random.number({ min: 0, max: 10 });
+    const length = faker.random.number({ min: 0, max: 5 });
     let problems = [];
     for(let i=0; i <= length; i++) {
       problems.push(faker.lorem.word());

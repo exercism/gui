@@ -1,26 +1,33 @@
+{{#if apiKeyUnset}}
+  {{#link-to "configuration" class="item"}}
+    Please configure your API key to enable these menu
+  {{/link-to}}
+{{/if}}
 <div class="item header">Links</div>
-{{link-to 'Submitting' 'tracks.track.local-problems' track.id class="item"}}
+{{link-to 'Submitting' 'tracks.track.local-problems' track.id class="item" disabled=(or apiKeyUnset trackIsNull)}}
 <div class="item">
   <b>Actions</b>
   <div class="menu">
-  {{#if apiKeyUnset}}
-    {{#link-to "configuration" class="item"}}
-      Please configure your API key to enable these actions
-    {{/link-to}}
-  {{/if}}
     <div class="item">
       <div
         data-test-fetch-btn
         {{action (route-action 'fetch')}}
-        class="{{buttonClass}}">
-        Fetch
+         class="{{buttonClass}} {{btnColor}}">
+        Fetch latest
       </div>
+    </div>
+    <div class="item">
+      {{#hold-button action=(route-action "fetchAll") as |hold|}}
+        <div class="{{buttonClass}} {{if (gt hold.countdown 0) 'purple' btnColor}}">
+        Fetch all (hold) <strong>{{hold.countdown}}</strong>
+        </div>
+      {{/hold-button}}
     </div>
     <div class="item">
       <div
         data-test-fetch-btn
         {{action (route-action 'restore')}}
-        class="{{buttonClass}}">
+         class="{{buttonClass}} {{btnColor}}">
         Restore
       </div>
     </div>
@@ -28,8 +35,8 @@
       <div
         data-test-status-btn
         {{action (route-action 'status' track.id)}}
-        class="{{buttonClass}}">
-        Status
+         class="{{buttonClass}} {{btnColor}}">
+        Get Status
       </div>
     </div>
     <div class="item">
@@ -43,7 +50,7 @@
       <div class="item">
         <div
           data-test-status-skip
-          class="{{buttonClass}} {{if (not problemToSkip) 'disabled' ''}}"
+          class="{{buttonClass}} {{btnColor}} {{if (not problemToSkip) 'disabled' ''}}"
           {{action (transition-to 'tracks.track.problems.problem.skip' problemToSkip)}}>
           Skip
         </div>

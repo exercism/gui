@@ -29,6 +29,10 @@ export default Ember.Route.extend({
       this.refreshOrTransition('tracks.track.fetch');
     },
 
+    fetchAll() {
+      this.refreshOrTransition('tracks.track.fetch-all');
+    },
+
     status(trackId) {
       this.refreshOrTransition('tracks.track.status', trackId);
     },

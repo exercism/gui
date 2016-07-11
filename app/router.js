@@ -8,8 +8,6 @@ const Router = Ember.Router.extend({
 Router.map(function() {
   this.route('tracks', function() {
     this.route('track', { path: ':track_id' }, function() {
-      this.route('fetch');
-
       this.route('status', function() {
         this.route('submission', { path: 'submission/:slug' });
       });
@@ -19,9 +17,12 @@ Router.map(function() {
           this.route('skip');
         });
       });
+
+      this.route('fetch');
+      this.route('restore');
+      this.route('fetch-all');
       this.route('local-problems');
       this.route('local-problems.submit', { path: 'local-problems/:path/submit' });
-      this.route('restore');
     });
   });
   this.route('configuration');

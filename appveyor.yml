@@ -26,7 +26,9 @@ build_script:
   - node node_modules\ember-cli\bin\ember electron:package --platform win32 --arch %package_arch% --icon public/assets/icons/win32.ico
 
 after_build:
-  - 7z a electron-builds\exercism-gui-win32-%PLATFORM%-%APPVEYOR_REPO_TAG_NAME%.zip electron-builds\exercism-gui-win32-%package_arch%
+  - cd electron-builds
+  - 7z a exercism-gui-win32-%PLATFORM%-%APPVEYOR_REPO_TAG_NAME%.zip exercism-gui-win32-%package_arch%
+  - cd ..
   - ps: ls electron-builds
 
 artifacts:

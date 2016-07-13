@@ -28,12 +28,12 @@ let getRelease = function(tagName='v0.0.5') {
 };
 
 test('it shows new release details', function(assert) {
-  let release = getRelease();
+  let release = getRelease('v0.1.0');
   this.set('release', release);
   this.set('info', { tag: 'v0.0.1', platform: 'linux', arch: 'x64' });
   this.render(hbs`{{new-release release=release info=info}}`);
   assert.ok(this.$(testSelector('published-at')).text().includes('ago'));
-  assert.equal(this.$(testSelector('tag-name')).text().trim(), release.tagName);
+  assert.equal(this.$(testSelector('tag-name')).text().trim(), '0.1.0');
   assert.equal(this.$(testSelector('tag-name')).attr('href'), release.htmlUrl);
 });
 

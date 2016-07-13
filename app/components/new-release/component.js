@@ -29,6 +29,10 @@ export default Ember.Component.extend({
     });
   }),
 
+  cleanTag: Ember.computed('release.tagName', function() {
+    return semver.clean(this.get('release.tagName'));
+  }),
+
   assetSize: Ember.computed('asset', function() {
     return (this.get('asset.size') / 1000000).toFixed(2);
   })

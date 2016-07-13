@@ -1,0 +1,35 @@
+{{#if newerVersionAvailable}}
+<div class="ui secondary raised segment">
+  <div class="ui feed">
+    <div class="event">
+      <div class="label">
+        <i class="announcement icon"></i>
+      </div>
+      <div class="content">
+        <div class="summary">
+          Version <a href="{{release.htmlUrl}}" data-test-tag-name>{{release.tagName}}</a> became available
+          <div class="date" data-test-published-at>
+            {{moment-from-now release.publishedAt}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="event">
+      <div class="label"></div>
+      <div class="content">
+        <div class="summary">
+          Download link for your platform
+        </div>
+        <div class="extra text" data-test-pkg-size>
+          {{assetSize}} MiB
+        </div>
+        <div>
+          <a href="{{asset.browserDownloadUrl}}" data-test-pkg-download-link>{{asset.browserDownloadUrl}}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{/if}}
+
+

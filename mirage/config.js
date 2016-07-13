@@ -3,6 +3,8 @@ import { faker, Response } from 'ember-cli-mirage';
 
 export default function() {
 
+  this.passthrough('https://api.github.com/**');
+
   this.timing = 300;      // delay for each request, automatically set to 0 during testing
 
   // Exercises API host

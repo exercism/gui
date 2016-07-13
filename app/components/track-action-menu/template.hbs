@@ -17,6 +17,11 @@
       </div>
     </div>
     <div class="item">
+      {{#if (or apiKeyUnset trackIsNull)}}
+        <div class="{{buttonClass}} {{btnColor}}">
+          Fetch all
+        </div>
+      {{else}}
       {{#hold-button action=(route-action "fetchAll") as |hold|}}
         <div class="{{buttonClass}} {{if hold.countdown 'purple' btnColor}}">
           {{#if (not hold.countdown)}}
@@ -31,6 +36,7 @@
           {{/if}}
         </div>
       {{/hold-button}}
+      {{/if}}
     </div>
     <div class="item">
       <div

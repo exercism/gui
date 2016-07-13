@@ -9,6 +9,12 @@ export default Ember.Component.extend({
     this.get('task').cancelAll();
   },
 
+  clickedTask: task(function * () {
+    this.set('pulsate', true);
+    yield timeout(100);
+    this.set('pulsate', false);
+  }).on('click'),
+
   task: task(function * () {
     let countdown = 4;
 

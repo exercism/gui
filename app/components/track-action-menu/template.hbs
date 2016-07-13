@@ -18,8 +18,17 @@
     </div>
     <div class="item">
       {{#hold-button action=(route-action "fetchAll") as |hold|}}
-        <div class="{{buttonClass}} {{if (gt hold.countdown 0) 'purple' btnColor}}">
-        Fetch all (hold) <strong>{{hold.countdown}}</strong>
+        <div class="{{buttonClass}} {{if hold.countdown 'purple' btnColor}}">
+          {{#if (not hold.countdown)}}
+            Fetch all
+            {{#if hold.pulsate}}
+              <strong>(hold)</strong>
+            {{else}}
+              (hold)
+            {{/if}}
+          {{else}}
+            <strong>{{hold.countdown}}</strong>
+          {{/if}}
         </div>
       {{/hold-button}}
     </div>
@@ -36,7 +45,7 @@
         data-test-status-btn
         {{action (route-action 'status' track.id)}}
          class="{{buttonClass}} {{btnColor}}">
-        Get Status
+        Get status
       </div>
     </div>
     <div class="item">

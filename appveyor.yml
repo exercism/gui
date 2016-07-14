@@ -12,11 +12,11 @@ platform:
 cache:
   - node_modules --> package.json
   - bower_components -> bower.json
-  - '%APPDATA%\npm-cache'
 
 install:
   - ps: Install-Product node 6 $env:PLATFORM
   - npm install bower -g
+  - npm install npm -g
   - npm install
   - bower install
 

@@ -10,7 +10,7 @@ platform:
   - x64
 
 cache:
-  - node_modules
+  - node_modules --> package.json
   - bower_components -> bower.json
   - '%APPDATA%\npm-cache'
 

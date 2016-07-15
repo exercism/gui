@@ -14,6 +14,7 @@ const OK = 'OK',
 
 const ServiceStatus = Ember.Object.extend({
   name: null,
+  host: null,
   status: VERIFYING
 });
 
@@ -63,8 +64,13 @@ export default Ember.Service.extend({
 
     // x.exercism.io is not responding to ping at port 80 so we just
     // do a simple GET request
-    let serviceStatus = ServiceStatus.create({ name: 'XAPI' });
+    let serviceStatus = ServiceStatus.create({
+      name: 'XAPI',
+      host: url.parse(configuration.xapi, true).host
+    });
+
     servicesStatus.push(serviceStatus);
+
     this.get('ajax').request(configuration.xapi).then(() => {
       serviceStatus.set('status', OK);
     }).catch(() => {
@@ -77,7 +83,7 @@ export default Ember.Service.extend({
     ];
 
     targets.forEach((target) => {
-      let serviceStatus = ServiceStatus.create({ name: target.name });
+      let serviceStatus = ServiceStatus.create({ name: target.name, host: target.host });
       servicesStatus.push(serviceStatus);
 
       ping.sys.probe(target.host, (isAlive) => {

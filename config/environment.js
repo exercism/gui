@@ -15,13 +15,14 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-      releaseTag: (process.env.TRAVIS_TAG) ? process.env.TRAVIS_TAG : 'v0.0.0-dev'
+      releaseTag: process.env.TRAVIS_TAG ? process.env.TRAVIS_TAG : process.env.APPVEYOR_REPO_TAG_NAME ? process.env.APPVEYOR_REPO_TAG_NAME : 'v0.0.0-dev'
     },
     flashMessageDefaults: {
       timeout: 3000,
       types: ['positive', 'negative', 'info']
     },
   };
+
 
   ENV['ember-cli-mirage'] = {
     enabled: (process.env.DISABLE_EMBER_CLI_MIRAGE === 'true')? false : true

@@ -5,16 +5,19 @@ export default Ember.Route.extend({
 
   model() {
     let debug = this.get('debug');
-    return debug.getLatestRelease().then((release) => {
-      return {
-        info: {
-          arch: debug.arch,
-          tag: debug.currentTag,
-          platform: debug.platform,
-        },
-        release
-      };
+    let response = Ember.Object.create({
+      info: {
+        arch: debug.arch,
+        tag: debug.currentTag,
+        platform: debug.platform,
+      },
+      relese: null
     });
+
+    debug.getLatestRelease().then((release) => {
+      response.set('release', release);
+    });
+    return response;
   }
 
 });

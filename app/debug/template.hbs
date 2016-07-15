@@ -21,9 +21,14 @@
     </thead>
     <tbody>
       {{#each model.servicesStatus as |serviceStatus|}}
-        <tr class="{{if (eq serviceStatus.status 'OK') 'positive' 'negative'}}">
+        <tr class="{{if (or (eq serviceStatus.status 'OK') (eq serviceStatus.status 'VERIFYING')) 'positive' 'negative'}}">
           <td>{{serviceStatus.name}}</td>
-          <td><i class="icon {{if (eq serviceStatus.status 'OK') 'checkmark' 'remove'}}"></i> {{serviceStatus.status}}</td>
+          <td>
+            {{#if (not-eq serviceStatus.status 'VERIFYING')}}
+            <i class="icon {{if (eq serviceStatus.status 'OK') 'checkmark' 'remove'}}"></i>
+            {{/if}}
+            {{serviceStatus.status}}
+          </td>
           <td>{{serviceStatus.host}}</td>
         </tr>
       {{/each}}

@@ -113,6 +113,7 @@
     "mkdirp": "^0.5.1",
     "node-notifier": "^4.6.0",
     "os-homedir": "^1.0.1",
+    "ping": "^0.1.10",
     "request-promise": "^3.0.0",
     "semver": "^5.2.0",
     "url-join": "^1.1.0"

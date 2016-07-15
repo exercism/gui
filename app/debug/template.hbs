@@ -1,0 +1,33 @@
+<div class="ui container">
+
+  <div class="ui segment">
+    <div class="ui bulleted relaxed list">
+      <div class="item">Platform: <strong>{{model.platform}} - {{model.arch}}</strong></div>
+      <div class="item">Version: <strong>{{model.currentTag}}</strong></div>
+      <div class="item">Latest version: <strong>{{model.latestTag}}</strong></div>
+      <div class="item">Home dir: <strong>{{model.homeDir}}</strong></div>
+      <div class="item">Exercises dir: <strong>{{model.homeExercisesDir}}</strong></div>
+      <div class="item">Config file: <strong>{{model.configFilePath}}</strong></div>
+    </div>
+  </div>
+
+  <table class="ui celled fixed table">
+    <thead>
+      <tr>
+        <th colspan="2">
+        Services status
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each model.servicesStatus as |serviceStatus|}}
+        <tr class="{{if (eq serviceStatus.status 'OK') 'positive' 'negative'}}">
+          <td>{{serviceStatus.name}}</td>
+          <td><i class="icon {{if (eq serviceStatus.status 'OK') 'checkmark' 'remove'}}"></i> {{serviceStatus.status}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+</div>
+{{outlet}}

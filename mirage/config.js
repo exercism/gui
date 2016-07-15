@@ -11,6 +11,10 @@ export default function() {
   // -------------------
   this.urlPrefix = 'http://x.exercism.io';
 
+  this.get('', () => { // PING request done by debug service
+    return new Response(500, {}, {});
+  });
+
   this.get('/tracks');
 
   this.get('/tracks/:id');

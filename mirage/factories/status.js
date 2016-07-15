@@ -11,7 +11,9 @@ export default Factory.extend({
   },
 
   submitted() {
-    let problems = faker.random.words(faker.random.number({ max: 60 }))
+    let num = faker.random.number({ max: 60 });
+    let problems = faker
+                   .random.words(num)
                    .toLowerCase()
                    .split(' ');
 
@@ -21,14 +23,16 @@ export default Factory.extend({
   },
 
   skipped() {
-    return faker.random.words(faker.random.number({ max: 20 }))
-           .toLowerCase()
-           .split(' ');
+    let num = faker.random.number({ max: 20 });
+    return faker
+      .random.words(num)
+      .toLowerCase()
+      .split(' ');
   },
 
   recent(i) {
     let lang = languages[i].toLowerCase();
-    let problem = (lang.indexOf('c')) ? 'exercism-gui-fake-problem' :  'You haven\'t submitted any solutions yet';
+    let problem = (lang.indexOf('c')) ? 'exercism-gui-fake-problem' : 'You haven\'t submitted any solutions yet';
     return {
       problem,
       submitted_at: faker.date.recent()

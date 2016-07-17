@@ -8,12 +8,11 @@
 
 # Overview
 
-Excercism GUI purpose is to provide an alternative to the command line interface (CLI) for [exercism.io](http://exercism.io/)
-
-It aims to be a cross-platform desktop app that lowers the barrier of entry for people which feel
+The purpose of excercism GUI is to provide an alternative to the command line interface (CLI) for [exercism.io](http://exercism.io/)
+Is a cross-platform desktop app that aims to lower the barrier of entry for people which feel
 more comfortable with a graphical interface than the command line.
 
-![screnshot](https://raw.github.com/exercism/gui/resources/screenshot.png)
+![screnshot](https://github.com/exercism/gui/blob/master/resources/screenshot.png)
 
 # Contributing guide
 

@@ -10,8 +10,7 @@ export default Ember.Route.extend({
         arch: debug.arch,
         tag: debug.currentTag,
         platform: debug.platform,
-      },
-      relese: null
+      }
     });
 
     debug.getLatestRelease().then((release) => {

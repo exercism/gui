@@ -28,6 +28,7 @@ Router.map(function() {
   this.route('configuration');
   this.route('help');
   this.route('debug');
+  this.route('updates');
 });
 
 export default Router;

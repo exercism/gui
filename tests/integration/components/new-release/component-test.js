@@ -106,3 +106,24 @@ test('it provides a download link for the proper platform - win32 ia32', functio
   let pkg = release.assets[3];
   assert.equal(this.$(testSelector('pkg-download-link')).text().trim(), pkg.browserDownloadUrl);
 });
+
+test('it shows hides message if showMessage is false', function(assert) {
+  let tag = 'v0.0.1',
+      release = getRelease('v0.0.1');
+  this.setProperties({ release, info: { tag } });
+  this.render(hbs`{{new-release release=release info=info showMessage=false}}`);
+  assert.equal(this.$(testSelector('message')).text(), '');
+});
+
+test('it shows a message if up-to-date', function(assert) {
+  let tag = 'v0.0.1',
+      release = getRelease('v0.0.1');
+  this.setProperties({ release, info: { tag } });
+  this.render(hbs`{{new-release release=release info=info showMessage=true}}`);
+  assert.ok(this.$(testSelector('message')).text().includes('up to date'));
+});
+
+test('it shows a message if no release info available', function(assert) {
+  this.render(hbs`{{new-release release=null info=null showMessage=true}}`);
+  assert.ok(this.$(testSelector('message')).text().toLowerCase().includes('could not connect'));
+});

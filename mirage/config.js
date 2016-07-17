@@ -12,6 +12,9 @@ export default function() {
   this.urlPrefix = 'http://x.exercism.io';
 
   this.get('', () => { // PING request done by debug service
+    if (faker.random.boolean()) {
+      return new Response(200, {}, { repository: 'https://github.com/exercism/x-api' });
+    }
     return new Response(500, {}, {});
   });
 

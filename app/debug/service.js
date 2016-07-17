@@ -9,13 +9,12 @@ const os = requireNode('os'),
 const { releaseTag } = ENV.APP;
 
 const OK = 'OK',
-      NOT_OK = 'NOT_OK',
-      VERIFYING = 'VERIFYING';
+      NOT_OK = 'NOT_OK';
 
 const ServiceStatus = Ember.Object.extend({
   name: null,
   host: null,
-  status: VERIFYING
+  status: 'VERIFYING'
 });
 
 export default Ember.Service.extend({
@@ -55,6 +54,7 @@ export default Ember.Service.extend({
 
     }).catch((error) => {
       Ember.Logger.warn('Cannot verify new release. Skipped due to error', error);
+      return null;
     });
   },
 
@@ -71,8 +71,12 @@ export default Ember.Service.extend({
 
     servicesStatus.push(serviceStatus);
 
-    this.get('ajax').request(configuration.xapi).then(() => {
-      serviceStatus.set('status', OK);
+    this.get('ajax').request(configuration.xapi).then((response) => {
+      if (response.build_id || response.repository) {
+        serviceStatus.set('status', OK);
+      } else {
+        serviceStatus.set('status', NOT_OK);
+      }
     }).catch(() => {
       serviceStatus.set('status', NOT_OK);
     });

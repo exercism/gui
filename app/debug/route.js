@@ -8,11 +8,12 @@ export default Ember.Route.extend({
         servicesStatus = debug.getServicesStatus();
 
     return debug.getLatestRelease().then((release) => {
+      let latestTag = (release && release.tagName)? release.tagName : 'N/A';
       return {
         arch: debug.arch,
         platform: debug.platform,
         currentTag: debug.currentTag,
-        latestTag: release.tagName,
+        latestTag: latestTag,
         homeDir: debug.homeDir,
         homeExercisesDir: debug.homeExercisesDir,
         configFilePath: debug.configFilePath,

@@ -1,35 +1,47 @@
 {{#if newerVersionAvailable}}
-<div class="ui secondary raised segment">
-  <div class="ui feed">
-    <div class="event">
-      <div class="label">
-        <i class="announcement icon"></i>
+  <div class="ui secondary raised segment">
+    <div class="ui feed">
+      <div class="event">
+        <div class="label">
+          <i class="announcement icon"></i>
+        </div>
+        <div class="content">
+          <div class="summary">
+            Version <a href="{{release.htmlUrl}}" data-test-tag-name>{{cleanTag}}</a> became available
+            <div class="date" data-test-published-at>
+              {{moment-from-now release.publishedAt}}
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="content">
-        <div class="summary">
-          Version <a href="{{release.htmlUrl}}" data-test-tag-name>{{cleanTag}}</a> became available
-          <div class="date" data-test-published-at>
-            {{moment-from-now release.publishedAt}}
+      <div class="event">
+        <div class="label"></div>
+        <div class="content">
+          <div class="summary">
+            Download link for your platform
+          </div>
+          <div class="extra text" data-test-pkg-size>
+            {{assetSize}} MiB
+          </div>
+          <div>
+            <a href="{{asset.browserDownloadUrl}}" data-test-pkg-download-link>{{asset.browserDownloadUrl}}</a>
           </div>
         </div>
       </div>
     </div>
-    <div class="event">
-      <div class="label"></div>
-      <div class="content">
-        <div class="summary">
-          Download link for your platform
-        </div>
-        <div class="extra text" data-test-pkg-size>
-          {{assetSize}} MiB
-        </div>
-        <div>
-          <a href="{{asset.browserDownloadUrl}}" data-test-pkg-download-link>{{asset.browserDownloadUrl}}</a>
-        </div>
-      </div>
-    </div>
   </div>
-</div>
+{{else}}
+  {{#if showMessage}}
+    {{#if (not release)}}
+      <div class="ui warning large message">
+        <p data-test-message>Could not connect to Github API to determine the latest release information</p>
+      </div>
+    {{else}}
+    <div class="ui success large message">
+      <p data-test-message>Your version is up to date</p>
+    </div>
+    {{/if}}
+  {{/if}}
 {{/if}}
 
 

@@ -5,14 +5,15 @@
 [![devDependency Status](https://david-dm.org/exercism/gui/dev-status.svg)](https://david-dm.org/exercism/gui#info=devDependencies)
 [![Code Climate](https://codeclimate.com/github/exercism/gui/badges/gpa.svg)](https://codeclimate.com/github/exercism/gui)
 
-__NOTE__: This is still a working progress. First usable release is expected to be `0.1.0`
 
 # Overview
 
-Excercism GUI purpose is to complement the command line interface (CLI) for [exercism.io](http://exercism.io/)
+Excercism GUI purpose is to provide an alternative to the command line interface (CLI) for [exercism.io](http://exercism.io/)
 
 It aims to be a cross-platform desktop app that lowers the barrier of entry for people which feel
 more comfortable with a graphical interface than the command line.
+
+![screnshot](https://raw.github.com/exercism/gui/resources/screenshot.png)
 
 # Contributing guide
 

@@ -8,11 +8,30 @@
 
 # Overview
 
-The purpose of excercism GUI is to provide an alternative to the command line interface (CLI) for [exercism.io](http://exercism.io/)
-Is a cross-platform desktop app that aims to lower the barrier of entry for people which feel
+The purpose of excercism GUI is to provide an alternative to the command line interface (CLI) for [exercism.io](http://exercism.io/).
+
+It aims to be a cross-platform desktop app that lowers the barrier of entry for people which feel
 more comfortable with a graphical interface than the command line.
 
 ![screnshot](https://github.com/exercism/gui/blob/master/resources/screenshot.png)
+
+# Installing and running the app
+
+The application is self contained in a compressed package (`.tar.gz` for Linux and Mac, `.zip` for Windows)
+
+To start using it, simply download the appropiate package for your platform from [here](https://github.com/exercism/gui/releases/latest) and extract it anywhere you like in the file system.
+
+Inside the extracted folder, double click on the **exercism-gui** binary to run the app.
+
+# Supported platforms
+
+Platform | Architecture
+------------ | -------------
+GNU/Linux (any distro)| 64 Bits (x64)
+MacOS X | 64 Bits (x64)
+Windows 7,8,10 | 64 Bits (x64)
+Windows 7,8,10 | 32 Bits (x86, ia32)
+
 
 # Contributing guide
 

@@ -31,7 +31,7 @@ test('it sends action up on save will all the correct values', function(assert) 
     dir: '/a/fake/path'
   };
   let newPath = '/some/new/path';
-  let save = function(configToSave) {
+  this.set('save', (configToSave) => {
     assert.equal(this.$(testSelector('dir-errmsg')).text(), '');
     assert.notOk(this.$(testSelector('dir-field')).hasClass('error'));
 
@@ -39,11 +39,11 @@ test('it sends action up on save will all the correct values', function(assert) 
     assert.equal(configToSave.xapi, config.xapi);
     assert.equal(configToSave.apiKey, config.apiKey);
     assert.equal(configToSave.dir, newPath);
-  };
+  });
+
   this.set('config', config);
-  this.set('actions', { save });
-  this.render(hbs`{{config-form config=config saveConfig=(action 'save')}}`);
-  this.$(testSelector('dir-input')).val(newPath).trigger('oninput');
+
+  this.render(hbs`{{config-form config=config saveConfig=(action save)}}`);
+  this.$(testSelector('dir-input')).val(newPath).trigger('input');
   this.$(testSelector('save-btn')).click();
-  assert.ok(true);
 });

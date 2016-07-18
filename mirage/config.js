@@ -47,6 +47,22 @@ export default function() {
     return schema.statuses.find(request.params.id);
   });
 
+  this.get('submissions/:id', (schema, request) => {
+    let uuid = request.params.id;
+    if (uuid.includes('bad')) {
+      return new Response(404, {}, { error: `unknown submission ${uuid}` });
+    }
+
+    return {
+      uuid,
+      url: `http://exercism.io/submissions/${uuid})}`,
+      slug: 'exercism-gui-fake-problem',
+      track_id: 'elixir',
+      username: 'frodo',
+      solution_files: { 'file1.ex': 'some content' }
+    };
+  });
+
   this.get('submissions/:track/:slug', (schema, request) => {
     let slug = request.params.slug,
         track_id = request.params.track;

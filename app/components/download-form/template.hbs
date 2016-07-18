@@ -1,0 +1,17 @@
+<form class="ui form {{if (v-get this 'isValid') '' 'error'}}">
+  <div class="field" data-test-field>
+    <label>Submission id</label>
+    <input
+      data-test-input
+      type="text"
+      value={{uuid}}
+      placeholder="ID of submitted solution to dowload"
+      oninput={{action (mut uuid) value="target.value"}}>
+    {{#if validations.attrs.uuid.message}}
+      <div class="ui error message" data-test-errmsg>
+        <p>{{validations.attrs.uuid.messages}}</p>
+      </div>
+    {{/if}}
+  </div>
+  <div class="ui primary basic button {{if (v-get this 'isValid') '' 'disabled'}}" {{action "download"}} data-test-btn>Download</div>
+</form>

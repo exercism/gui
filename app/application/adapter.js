@@ -30,7 +30,7 @@ export default ActiveModelAdapter.extend({
   },
 
   handleResponse: function(status, headers, payload, requestData) {
-    if (status === 400 && payload.error && !payload.errors) {
+    if (!this.isSuccess() && payload && payload.error && !payload.errors) {
       payload.errors = [
         {
           status: `${status}`,
@@ -44,11 +44,11 @@ export default ActiveModelAdapter.extend({
 
   buildURL(modelName, id, snapshot, requestType, query) {
     if (requestType === 'GET' && modelName === 'problem') {
-      // Restore problems
+      // URL for restore problems
       return urlJoin(this.get('configuration.xapi'), `/v2/exercises/`);
     }
     if (requestType === 'POST' && modelName === 'problem') {
-      // Skip problem
+      // URL for skip problem
       let track = snapshot.attr('trackId'),
           slug = snapshot.attr('slug');
       return urlJoin(this.get('configuration.api'), `/api/v1/iterations/${track}/${slug}`);
@@ -81,6 +81,9 @@ export default ActiveModelAdapter.extend({
     if (modelName === 'status') {
       return urlJoin(this.get('configuration.api'), `/api/v1/tracks/${id}/status`);
     }
+    if (modelName === 'submission') {
+      return urlJoin(this.get('configuration.api'), `/api/v1/submissions/${id}`);
+    }
     return this._super(...arguments);
   },
 
@@ -89,6 +92,10 @@ export default ActiveModelAdapter.extend({
       if (snapshot.modelName === 'status') {
         response.id = response.track_id;
         response = { status: response };
+      }
+      if (snapshot.modelName === 'submission') {
+        response.id = response.uuid;
+        response = { submission: response };
       }
       return response;
     });

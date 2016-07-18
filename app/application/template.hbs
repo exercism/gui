@@ -4,8 +4,21 @@
     {{#link-to "index" class="item"}}
       <img src="assets/images/e_red_small.png">
     {{/link-to}}
-    {{link-to "Configuration" "configuration" class="item"}}
-    {{link-to "Tracks" "tracks" class="item"}}
+
+    {{#link-to "configuration" class="item"}}
+      <i class="configure icon"></i>
+      Configuration
+    {{/link-to}}
+
+    {{#link-to "tracks" class="item"}}
+      <i class="road icon"></i>
+      Tracks
+    {{/link-to}}
+
+    {{#link-to "download" class="item"}}
+      <i class="download icon"></i>
+      Download
+    {{/link-to}}
   </div>
   <div class="right menu">
     {{#link-to "help" class="item"}}

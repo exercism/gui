@@ -29,6 +29,9 @@ Router.map(function() {
   this.route('help');
   this.route('debug');
   this.route('updates');
+  this.route('download', function() {
+    this.route('status', { path: ':submission_id/status' });
+  });
 });
 
 export default Router;

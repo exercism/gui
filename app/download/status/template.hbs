@@ -1,0 +1,20 @@
+{{#if model.error}}
+<div class="ui negative message">
+  <div class="header" data-test-error>
+    Something went wrong while retrieving the submission
+  </div>
+  <p>
+    {{model.error}}
+  </p>
+</div>
+{{else}}
+<div class="ui positive message">
+  <div class="header" data-test-success>
+  Successfully downloaded submission
+  </div>
+  <p>
+    The submission can be viewed at
+    <b>{{model.path}}</b>
+  </p>
+</div>
+{{/if}}

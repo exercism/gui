@@ -166,3 +166,48 @@ test('extracts details from path with nested folders', function(assert) {
   assert.equal(problem, 'bob');
   assert.equal(language, 'elixir');
 });
+
+// /home/pablo/exercism/solutions/holandes22/elixir/acronym/1758fa0ec480443c86b0f5740da83b4d
+// /home/pablo/exercism/solutions/<username>/<trackId>/<slug>/<uuid>
+
+test('downloaded submitted solutions are saved in the correspondent dir', function(assert) {
+  let service = this.subject();
+  service.configuration = { dir: '/t' };
+  mockFs({ '/t': {} });
+
+  let submission = {
+    uuid: 'fakeuuid',
+    slug: 'hello-world',
+    trackId: 'elixir',
+    username: 'frodo',
+    solutionFiles: {
+      f1: 'content 1',
+      f2: 'content 2'
+    }
+  };
+
+  service.saveSubmittedFiles(submission);
+  assert.equal(fs.readFileSync('/t/solutions/frodo/elixir/hello-world/fakeuuid/f1').toString(), 'content 1');
+  assert.equal(fs.readFileSync('/t/solutions/frodo/elixir/hello-world/fakeuuid/f2').toString(), 'content 2');
+});
+
+test('saveSubmittedFiles overwrites existing files', function(assert) {
+  let service = this.subject();
+  service.configuration = { dir: '/t' };
+  mockFs({ '/t/solutions/frodo/elixir/hello-world/fakeuuid/f1': 'old content' });
+
+  let submission = {
+    uuid: 'fakeuuid',
+    slug: 'hello-world',
+    trackId: 'elixir',
+    username: 'frodo',
+    solutionFiles: {
+      f1: 'content 1',
+      f2: 'content 2'
+    }
+  };
+
+  service.saveSubmittedFiles(submission);
+  assert.equal(fs.readFileSync('/t/solutions/frodo/elixir/hello-world/fakeuuid/f1').toString(), 'content 1');
+  assert.equal(fs.readFileSync('/t/solutions/frodo/elixir/hello-world/fakeuuid/f2').toString(), 'content 2');
+});

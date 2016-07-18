@@ -104,6 +104,23 @@ export default Ember.Service.extend({
     solution[fileName] = fs.readFileSync(filePath, { encoding: 'utf-8' });
 
     return { key, dir, language, problem, solution, code };
+  },
+
+  saveSubmittedFiles(submission) {
+    let dir = this.get('configuration.dir'),
+        username = get(submission, 'username'),
+        trackId = get(submission, 'trackId'),
+        slug = get(submission, 'slug'),
+        uuid = get(submission, 'uuid'),
+        folderPath = path.join(dir, 'solutions', username, trackId, slug, uuid);
+
+      mkdirp.sync(folderPath);
+
+      lodash.forEach(get(submission, 'solutionFiles'), (content, name) => {
+        fs.writeFileSync(path.join(folderPath, name), content);
+      });
+
+      return folderPath;
   }
 
 });

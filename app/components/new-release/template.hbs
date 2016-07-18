@@ -14,7 +14,8 @@
           </div>
         </div>
       </div>
-      <div class="event">
+      {{#if asset}}
+      <div class="event" data-test-download-link>
         <div class="label"></div>
         <div class="content">
           <div class="summary">
@@ -28,6 +29,7 @@
           </div>
         </div>
       </div>
+      {{/if}}
     </div>
   </div>
 {{else}}

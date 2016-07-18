@@ -7,8 +7,9 @@ moduleForComponent('new-release', 'Integration | Component | new release', {
 });
 
 
-let getRelease = function(tagName='v0.0.5') {
-  let assets = ['linux-x64', 'darwin-x64', 'win32-x64', 'win32-x86'].map((platform) => {
+let getAssets = function(tagName, platforms=null) {
+  platforms = platforms? platforms : ['linux-x64', 'darwin-x64', 'win32-x64', 'win32-x86'];
+  return platforms.map((platform) => {
     let name = `exercism-gui-${platform}-${tagName}.tar.gz`;
 
     return {
@@ -16,14 +17,16 @@ let getRelease = function(tagName='v0.0.5') {
       size: 43604687,
       name
     };
-
   });
+};
 
+
+let getRelease = function(tagName='v0.0.5') {
   return {
     htmlUrl: `https://github.com/exercism/gui/releases/tag/${tagName}`,
     publishedAt: '2016-07-11T19:00:00Z',
     tagName,
-    assets
+    assets: getAssets(tagName),
   };
 };
 
@@ -107,7 +110,7 @@ test('it provides a download link for the proper platform - win32 ia32', functio
   assert.equal(this.$(testSelector('pkg-download-link')).text().trim(), pkg.browserDownloadUrl);
 });
 
-test('it shows hides message if showMessage is false', function(assert) {
+test('it hides message if showMessage is false', function(assert) {
   let tag = 'v0.0.1',
       release = getRelease('v0.0.1');
   this.setProperties({ release, info: { tag } });
@@ -126,4 +129,22 @@ test('it shows a message if up-to-date', function(assert) {
 test('it shows a message if no release info available', function(assert) {
   this.render(hbs`{{new-release release=null info=null showMessage=true}}`);
   assert.ok(this.$(testSelector('message')).text().toLowerCase().includes('could not connect'));
+});
+
+test('it hides package link if no assets', function(assert) {
+  let release = getRelease('v0.1.0');
+  release.assets = [];
+  this.set('release', release);
+  this.set('info', { tag: 'v0.0.1' });
+  this.render(hbs`{{new-release release=release info=info}}`);
+  assert.equal(this.$(testSelector('download-link')).text(), '');
+});
+
+test('it hides package link if no asset for the platform', function(assert) {
+  let release = getRelease('v0.1.0');
+  release.assets = getAssets('v0.1.0', ['linux-x64']);
+  this.set('release', release);
+  this.set('info', { tag: 'v0.0.1', platform: 'win32', arch: 'ia32' });
+  this.render(hbs`{{new-release release=release info=info}}`);
+  assert.equal(this.$(testSelector('download-link')).text(), '');
 });

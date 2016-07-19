@@ -13,15 +13,33 @@ The purpose of excercism GUI is to provide an alternative to the command line in
 It aims to be a cross-platform desktop app that lowers the barrier of entry for people which feel
 more comfortable with a graphical interface than the command line.
 
-![screnshot](https://github.com/exercism/gui/blob/master/resources/screenshot.png)
+![](https://github.com/exercism/gui/blob/master/resources/anim.gif)
 
 # Installing and running the app
 
-The application is self contained in a compressed package (`.tar.gz` for Linux and Mac, `.zip` for Windows)
+**Note:
 
-To start using it, simply download the appropiate package for your platform from [here](https://github.com/exercism/gui/releases/latest) and extract it anywhere you like in the file system.
+    Currently there is no installer available, this is a planned feature. Check ticket #6 for more details
 
-Inside the extracted folder, double click on the **exercism-gui** binary to run the app.
+The application is distributed using a compressed package (`.tar.gz` for Linux/MacOS and `.zip` for Windows)
+To start using it, simply download the appropiate package for your platform from [here](https://github.com/exercism/gui/releases/latest)
+and extract it anywhere you like in the file system.
+
+All the needed files for the app to run are contained within the extracted folder, nothing is installed outside of it.
+
+To start the app, go to the extracted folder and double click on the **exercism-gui** executable.
+
+
+## Upgrade
+
+Until an installer is available, upgrading is a manual process. To "upgrade" simply download the new package and extract over the old files.
+Or extract to a new folder and remove the old version.
+Removing the old folder is completely safe as no user information is stored in it (unless you explicitely configure the `exercism` folder to be
+under it, which is *not* recommended)
+
+## Remove
+
+Until an installer is available, removing is simply a matter of deleting the extracted folder.
 
 # Supported platforms
 
@@ -37,6 +55,14 @@ Windows 7,8,10 | 32 Bits (x86, ia32)
 
 Contributions are more than welcome!
 
+To help with the code a basic knowledge of Javascript is required.
+But if Javascript or programming is not your thing, there are many ways to help:
+
+- Testing the app on the different supported platforms
+- Desing: if you have some thoughts on how to improve the UI or UX, let's hear them!
+- Writing docs to help newcomers getting started
+- Giving feedback: things that are not clear or hard to understand
+
 ## Project overview
 
 This is an application written with the help of the following technologies:
@@ -49,7 +75,7 @@ This is an application written with the help of the following technologies:
 
 ## Project structure
 
-This is a standard ember.js app, so if you are familiar with ember and ember-cli you can jump right into.
+This is a standard ember.js app (wrapped with electron) so if you are familiar with ember and ember-cli you can jump right into.
 
 If you are not familiar with the framework, getting to know ember is needed, but it is very easy to get started with.
 Some resources:

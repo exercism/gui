@@ -17,7 +17,7 @@ more comfortable with a graphical interface than the command line.
 
 # Installing and running the app
 
-**Note:
+**Note:**
 
     Currently there is no installer available, this is a planned feature. Check ticket #6 for more details
 

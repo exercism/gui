@@ -56,10 +56,11 @@ Windows 7,8,10 | 32 Bits (x86, ia32)
 Contributions are more than welcome!
 
 To help with the code a basic knowledge of Javascript is required.
-But if Javascript or programming is not your thing, there are many ways to help:
 
-- Testing the app on the different supported platforms
-- Desing: if you have some thoughts on how to improve the UI or UX, let's hear them!
+If Javascript or programming is not your thing, there are many ways to help:
+
+- Testing the app on the different supported platforms (nothing fancy, just using it normally is enough)
+- Design: if you have some thoughts on how to improve the UI or UX, let's hear them!
 - Writing docs to help newcomers getting started
 - Giving feedback: things that are not clear or hard to understand
 

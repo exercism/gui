@@ -8,13 +8,26 @@
   </p>
 </div>
 {{else}}
-<div class="ui positive message">
-  <div class="header" data-test-success>
+
+<h4 class="ui top attached grey header" data-test-success>
   Successfully downloaded submission
+</h4>
+<div class="ui attached segment">
+  <div class="ui grid">
+    <div class="row">
+      <div class="sixteen wide column">
+        <p>It can be viewed at <b>{{model.path}}</b></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="right floated three wide right aligned column">
+        <div class="ui basic black button" {{action (route-action "openSolutionFolder" model.path)}}>
+          <i class="icon folder open outline"></i>
+          Open folder
+        </div>
+      </div>
+    </div>
   </div>
-  <p>
-    The submission can be viewed at
-    <b>{{model.path}}</b>
-  </p>
 </div>
 {{/if}}
+

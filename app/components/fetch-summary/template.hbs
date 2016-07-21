@@ -1,51 +1,63 @@
-{{#each summary as |info|}}
-<div class="ui relaxed list">
-  <div class="item">
-    <i class="folder icon"></i>
-    <div class="content">
-      <div class="header">{{info.problem}}</div>
-      <div class="list">
-        {{#if info.new}}
+<div class="ui grid">
+  <div class="twelve wide column">
+    {{#each summary as |info|}}
+      <div class="ui relaxed list">
         <div class="item">
           <i class="folder icon"></i>
           <div class="content">
-            <div class="header">New files</div>
-            <div class="list" data-test-new-files="{{info.problem}}">
-              {{#each info.new as |new|}}
+            <div class="header">{{info.problem}}</div>
+            <div class="list">
+              {{#if info.new}}
               <div class="item">
-                <i class="file outline text green icon"></i>
+                <i class="folder icon"></i>
                 <div class="content">
-                  <div>{{new}}</div>
+                  <div class="header">New files</div>
+                  <div class="list" data-test-new-files="{{info.problem}}">
+                    {{#each info.new as |new|}}
+                    <div class="item">
+                      <i class="file outline text green icon"></i>
+                      <div class="content">
+                        <div>{{new}}</div>
+                      </div>
+                    </div>
+                    {{/each}}
+                  </div>
                 </div>
               </div>
-              {{/each}}
+              {{/if}}
+              {{#if info.unchanged}}
+              <div class="item">
+                <i class="folder icon"></i>
+                <div class="content">
+                  <div class="header">Unchanged files</div>
+                  <div class="list" data-test-unchanged-files="{{info.problem}}">
+                    {{#each info.unchanged as |unchanged|}}
+                    <div class="item">
+                      <i class="file outline text pink icon"></i>
+                      <div class="content">
+                        <div>{{unchanged}}</div>
+                      </div>
+                    </div>
+                    {{/each}}
+                  </div>
+                </div>
+              </div>
+              {{/if}}
             </div>
           </div>
         </div>
-        {{/if}}
-        {{#if info.unchanged}}
-        <div class="item">
-          <i class="folder icon"></i>
-          <div class="content">
-            <div class="header">Unchanged files</div>
-            <div class="list" data-test-unchanged-files="{{info.problem}}">
-              {{#each info.unchanged as |unchanged|}}
-              <div class="item">
-                <i class="file outline text pink icon"></i>
-                <div class="content">
-                  <div>{{unchanged}}</div>
-                </div>
-              </div>
-              {{/each}}
-            </div>
-          </div>
-        </div>
-        {{/if}}
       </div>
+      {{#if (gt summary.length 1)}}
+        <div class="ui divider"></div>
+      {{/if}}
+    {{/each}}
+  </div>
+  <div class="four wide right aligned column">
+    <div class="ui basic button" {{action (route-action "openTrackFolder")}}>
+      <i class="icon folder open outline"></i>
+      Open track folder
     </div>
   </div>
 </div>
-{{#if (gt summary.length 1)}}
-<div class="ui divider"></div>
-{{/if}}
-{{/each}}
+
+

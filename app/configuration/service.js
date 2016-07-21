@@ -44,7 +44,6 @@ export default Ember.Service.extend({
       let stat = fs.statSync(filePath);
       return stat.isFile();
     } catch(err) {
-      window.console.log('file does not exists:', filePath);
       return false;
     }
   },
@@ -52,7 +51,7 @@ export default Ember.Service.extend({
   getConfigFilePath() {
     let configFilePath = process.env.EXERCISM_CONFIG_FILE;
     if (configFilePath) {
-      window.console.log(`Using config file ${configFilePath} set by envar EXERCISM_CONFIG_FILE`);
+      Ember.Logger.info(`Using config file ${configFilePath} set by envar EXERCISM_CONFIG_FILE`);
     } else {
       configFilePath = this.getHomeConfigFilePath();
     }

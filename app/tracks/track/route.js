@@ -1,9 +1,13 @@
 import Ember from 'ember';
 
 const {getOwner} = Ember;
+const electron = requireNode('electron');
+const path = requireNode('path');
 
 export default Ember.Route.extend({
+  configuration: Ember.inject.service(),
   selections: Ember.inject.service(),
+
   model(params) {
     return this.store.peekRecord('track', params.track_id);
   },
@@ -17,7 +21,7 @@ export default Ember.Route.extend({
     let [route, ...args] = arguments;
     let currentRoute = getOwner(this).lookup('controller:application').currentRouteName;
     if (currentRoute === route || currentRoute === `${route}.index`) {
-      window.console.info('Refreshing route', currentRoute);
+      Ember.Logger.info('Refreshing route', currentRoute);
       this.send('refreshModel');
     } else {
       this.transitionTo(route, ...args);
@@ -39,6 +43,14 @@ export default Ember.Route.extend({
 
     restore() {
       this.refreshOrTransition('tracks.track.restore');
+    },
+
+    openTrackFolder() {
+      let dir = this.get('configuration.dir'),
+          selectedTrack = this.get('selections.selectedTrack.slug'),
+          fullPath = path.join(dir, selectedTrack);
+
+      electron.shell.openItem(fullPath);
     }
 
   }

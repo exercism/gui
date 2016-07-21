@@ -1,5 +1,7 @@
 import Ember from 'ember';
 
+const electron = requireNode('electron');
+
 export default Ember.Route.extend({
   exercism: Ember.inject.service(),
 
@@ -12,5 +14,11 @@ export default Ember.Route.extend({
       let message = error.errors[0].detail;
       return { path: null, error: message };
     });
+  },
+
+  actions: {
+    openSolutionFolder(path) {
+      electron.shell.openItem(path);
+    }
   }
 });

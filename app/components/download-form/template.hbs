@@ -1,4 +1,4 @@
-<form class="ui form {{if (v-get this 'isValid') '' 'error'}}">
+<form class="ui form {{if (v-get this 'isInvalid') 'error'}}">
   <div class="field" data-test-field>
     <label>Submission id</label>
     <input
@@ -13,5 +13,5 @@
       </div>
     {{/if}}
   </div>
-  <div class="ui primary basic button {{if (v-get this 'isValid') '' 'disabled'}}" {{action "download"}} data-test-btn>Download</div>
+  <div class="ui primary basic button {{if (v-get this 'isInvalid') 'disabled'}}" {{action "download"}} data-test-btn>Download</div>
 </form>

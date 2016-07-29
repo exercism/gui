@@ -13,12 +13,12 @@
   </div>
   <button
     data-test-submit-btn
-    class="ui secondary basic button {{if selectedFile '' 'disabled'}}"
+    class="ui secondary basic button {{if (not selectedFile) 'disabled'}}"
     {{action "submit"}}>
       Submit
   </button>
   <button
-    class="ui secondary basic button {{if selectedFile '' 'disabled'}}"
+    class="ui secondary basic button {{if (not selectedFile) 'disabled'}}"
     {{action "open"}}>
       Open
   </button>

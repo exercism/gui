@@ -5,8 +5,8 @@
   </div>
 </div>
 
-<form class="ui form {{if (v-get this 'isValid') '' 'error'}}">
-  <div class="field {{if validations.attrs.dir.isValid '' 'error'}}" data-test-dir-field>
+<form class="ui form {{if (v-get this 'isInvalid') 'error'}}">
+  <div class="field {{if validations.attrs.dir.isInvalid 'error'}}" data-test-dir-field>
     <label>Exercises directory</label>
     <input
       data-test-dir-input
@@ -20,7 +20,7 @@
       </div>
     {{/if}}
   </div>
-  <div class="field {{if validations.attrs.apiKey.isValid '' 'error'}}">
+  <div class="field {{if validations.attrs.apiKey.isInvalid 'error'}}">
     <label>API key
     {{#if (not apiKey)}}
       (see <a href="http://exercism.io/account/key">http://exercism.io/account/key</a>)
@@ -46,7 +46,7 @@
   </div>
 
   {{#if showingAdvanced}}
-  <div class="field {{if validations.attrs.api.isValid '' 'error'}}">
+  <div class="field {{if validations.attrs.api.isInvalid 'error'}}">
     <label>Exercism API</label>
     <input
       type="text"
@@ -59,7 +59,7 @@
       </div>
     {{/if}}
   </div>
-  <div class="field {{if validations.attrs.xapi.isValid '' 'error'}}">
+  <div class="field {{if validations.attrs.xapi.isInvalid 'error'}}">
     <label>Exercises API</label>
     <input
       type="text"

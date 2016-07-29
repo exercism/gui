@@ -72,11 +72,11 @@ This is an application written with the help of the following technologies:
 - [electron](http://electron.atom.io/) To build the cross-platform desktop app
 - [ember-electron](https://github.com/felixrieseberg/ember-electron) an ember.js addon that facilitates
   ember and electron integration (dev, packaging, running tests, etc.)
-- node.js and node packages to communicate with the desktop (notifications, file system, etc.)
+- [node.js](https://nodejs.org) and node packages to communicate with the desktop (notifications, file system, etc.)
 
 ## Project structure
 
-This is a standard ember.js app (wrapped with electron) so if you are familiar with ember and ember-cli you can jump right into.
+This is a standard ember.js app (wrapped with electron) so if you are familiar with ember and [ember-cli](https://ember-cli.com/) you can jump right into.
 
 If you are not familiar with the framework, getting to know ember is needed, but it is very easy to get started with.
 Some resources:

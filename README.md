@@ -105,6 +105,7 @@ At build time, files are inspected with jshint so make sure there are not warnin
 - Latest version of node (check install instructions at https://nodejs.org/en/)
 - Bower: `npm install -g bower`
 - Watchman: optional but highly recommended (to listen on file changes for automatic rebuilds during dev: https://facebook.github.io/watchman/)
+- Python 2.7: A dependency of this project, [node-gyp](https://github.com/nodejs/node-gyp#installation), requires Python 2.7 (check install instructions at https://www.python.org/downloads/). Python 3 is *not* supported. If you have Python 3 as your primary Python environment you can use the `--python` switch when running `npm install`: `npm install --python=python2.7`
 
 
 ### Clone and get started

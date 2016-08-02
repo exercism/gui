@@ -19,7 +19,7 @@ more comfortable with a graphical interface than the command line.
 
 **Note:**
 
-    Currently there is no installer available, this is a planned feature. Check ticket #6 for more details
+> Currently there is no installer available, this is a planned feature. Check ticket #6 for more details
 
 The application is distributed using a compressed package (`.tar.gz` for Linux/MacOS and `.zip` for Windows)
 To start using it, simply download the appropiate package for your platform from [here](https://github.com/exercism/gui/releases/latest)

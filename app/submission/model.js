@@ -8,6 +8,7 @@ export default Model.extend({
   slug: attr('string'),
   trackId: attr('string'),
   username: attr('string'),
+  submissionPath: attr('string'),
   solutionFiles: attr(),
   submit: memberAction({ path: 'assignments', type: 'post' })
 });

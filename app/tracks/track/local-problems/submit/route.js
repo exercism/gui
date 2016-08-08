@@ -8,7 +8,7 @@ export default Ember.Route.extend({
         submission = this.store.createRecord('submission');
     return submission.submit(props).then((response) => {
       return {
-        url: response.url,
+        submissionPath: response.submission_path,
         submittedFile: filePath,
         iteration: response.iteration
       };

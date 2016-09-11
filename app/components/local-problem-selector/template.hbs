@@ -4,6 +4,7 @@
     <div class="six wide column">
       {{#power-select
         options=(sort-by "name" problems)
+        searchField="name"
         selected=selectedProblem
         placeholder="Please, select a problem"
         onchange=(action (mut selectedProblem)) as |problem|}}

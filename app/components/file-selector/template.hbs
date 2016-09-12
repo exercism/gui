@@ -11,6 +11,15 @@
     </div>
     {{/each}}
   </div>
+
+  <div class="field">
+    <label>Submit comment (optional)</label>
+    <input
+      type="text"
+      value={{comment}}
+      oninput={{action (mut comment) value="target.value"}}>
+  </div>
+
   <button
     data-test-submit-btn
     class="ui secondary basic button {{if (not selectedFile) 'disabled'}}"

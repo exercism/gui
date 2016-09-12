@@ -10,8 +10,8 @@ export default Ember.Route.extend({
   },
 
   actions: {
-    submit(filePath) {
-      this.transitionTo('tracks.track.local-problems.submit', filePath);
+    submit() {
+      this.transitionTo('tracks.track.submit-status');
     },
 
     refreshModel() {

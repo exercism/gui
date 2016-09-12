@@ -94,7 +94,7 @@ export default Ember.Service.extend({
     return { fileName, problem, language };
   },
 
-  getSubmitPayload(filePath) {
+  getSubmitPayload(filePath, comment) {
     let solution = {}, code = '',
         key = this.get('configuration.apiKey'),
         dir = this.get('configuration.dir');
@@ -103,7 +103,7 @@ export default Ember.Service.extend({
 
     solution[fileName] = fs.readFileSync(filePath, { encoding: 'utf-8' });
 
-    return { key, dir, language, problem, solution, code };
+    return { key, dir, language, problem, solution, code, comment };
   },
 
   saveSubmittedFiles(submission) {

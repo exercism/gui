@@ -5,8 +5,10 @@ const fs = requireNode('fs'),
       electron = requireNode('electron');
 
 export default Ember.Component.extend({
+  selections: Ember.inject.service(),
   selectedFile: null,
   errorMessage: null,
+  comment: null,
   refreshing: false,
 
   change() {
@@ -25,7 +27,10 @@ export default Ember.Component.extend({
   actions: {
     submit() {
       this.handleAction((filePath) => {
-        this.attrs.submit(btoa(filePath));
+        let selections = this.get('selections');
+        selections.set('selectedFileToSubmit', filePath);
+        selections.set('submitComment', this.get('comment'));
+        this.attrs.submit();
       });
     },
 

@@ -22,8 +22,8 @@ Router.map(function() {
       this.route('fetch');
       this.route('restore');
       this.route('fetch-all');
-      this.route('local-problems');
-      this.route('local-problems.submit', { path: 'local-problems/:path/submit' });
+      this.route('local-problems');  //Submitting
+      this.route('submit-status');
     });
   });
   this.route('configuration');

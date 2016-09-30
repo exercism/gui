@@ -48,7 +48,7 @@
     "ember-concurrency": "0.7.8",
     "ember-cp-validations": "2.9.3",
     "ember-data": "^2.7.0",
-    "ember-electron": "1.8.0",
+    "ember-electron": "1.9.1",
     "ember-export-application-global": "^1.0.5",
     "ember-inspector": "1.10.0",
     "ember-load-initializers": "^0.5.1",

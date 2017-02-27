@@ -14,6 +14,6 @@ export default Model.extend({
     return `http://exercism.io/languages/${this.get('slug')}`;
   }),
   imageSrc: Ember.computed('slug', function() {
-    return `http://exercism.io/img/tracks/${this.get('slug')}.png`;
+    return `http://exercism.io/tracks/${this.get('slug')}/icon`;
   })
 });

@@ -81,8 +81,9 @@ This is a standard ember.js app (wrapped with electron) so if you are familiar w
 If you are not familiar with the framework, getting to know ember is needed, but it is very easy to get started with.
 Some resources:
 
-- [The ember.js guides]( https://guides.emberjs.com/v2.6.0/)
+- [The ember.js guides](https://guides.emberjs.com)
 - Great free ebook (but you can pay for it if you find it useful): https://leanpub.com/ember-cli-101
+- Great free learning videos https://www.emberscreencasts.com/
 
 The project uses the "pod" folder structure (you don't need to worry about this if using ember-cli generators
 as this is handled automatically, just be aware if creating files manually)
@@ -102,8 +103,9 @@ At build time, files are inspected with jshint so make sure there are not warnin
 
 ### Prerequisites:
 
-- Latest version of node (check install instructions at https://nodejs.org/en/)
+- Node.js 6 or later (check install instructions at https://nodejs.org/en/)
 - Bower: `npm install -g bower`
+- Yarn (check install instructions at https://yarnpkg.com/en/docs/install)
 - Watchman: optional but highly recommended (to listen on file changes for automatic rebuilds during dev: https://facebook.github.io/watchman/)
 - Python 2.7: A dependency of this project, [node-gyp](https://github.com/nodejs/node-gyp#installation), requires Python 2.7 (check install instructions at https://www.python.org/downloads/). Python 3 is *not* supported. If you have Python 3 as your primary Python environment you can use the `--python` switch when running `npm install`: `npm install --python=python2.7`
 
@@ -113,7 +115,7 @@ At build time, files are inspected with jshint so make sure there are not warnin
 After forking and cloning the exercism/gui repo, install the dependencies:
 
     $ cd /path/to/repo
-    $ npm install
+    $ yarn install
     $ bower install
 
 Start the dev app

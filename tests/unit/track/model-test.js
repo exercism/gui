@@ -11,5 +11,5 @@ test('it returns site url formed with slug', function(assert) {
 
 test('it returns logo url formed with slug', function(assert) {
   let model = this.subject({ slug: 'fake' });
-  assert.equal('http://exercism.io/img/tracks/fake.png', model.get('imageSrc'));
+  assert.equal('http://exercism.io/tracks/fake/icon', model.get('imageSrc'));
 });

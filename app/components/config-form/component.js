@@ -3,10 +3,8 @@ import { validator, buildValidations } from 'ember-cp-validations';
 
 let presenceOptions = {
   presence: true,
-  dependentKeys: ['validationsDisabled'],
-  disabled(model) {
-    return model.get('validationsDisabled');
-  }
+  dependentKeys: ['model.validationsDisabled'],
+  disabled: Ember.computed.not('model.validationsEnabled')
 };
 
 let Validations = buildValidations({
@@ -19,7 +17,7 @@ let Validations = buildValidations({
 
 export default Ember.Component.extend(Validations, {
   showingAdvanced: false,
-  validationsDisabled: true,
+  validationsEnabled: false,
 
   init() {
     this._super(...arguments);
@@ -33,13 +31,13 @@ export default Ember.Component.extend(Validations, {
 
   actions: {
     saveConfig() {
-      this.set('validationsDisabled', false);
+      this.set('validationsEnabled', true);
       if (this.get('validations.isValid')) {
         let dir = this.get('dir'),
             apiKey = this.get('apiKey'),
             api = this.get('api'),
             xapi = this.get('xapi');
-        this.attrs.saveConfig({ dir, apiKey, api, xapi });
+        this.get('attrs').saveConfig({ dir, apiKey, api, xapi });
       }
     }
   }

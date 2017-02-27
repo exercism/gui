@@ -30,7 +30,7 @@ export default Ember.Component.extend({
         let selections = this.get('selections');
         selections.set('selectedFileToSubmit', filePath);
         selections.set('submitComment', this.get('comment'));
-        this.attrs.submit();
+        this.get('attrs').submit();
       });
     },
 
@@ -42,7 +42,7 @@ export default Ember.Component.extend({
 
     refresh() {
       this.set('refreshing', true);
-      this.attrs.refresh();
+      this.get('attrs').refresh();
       Ember.run.later(() => {
         // We wait a little since usually the response
         // is very fast and the visual feedback is lost

@@ -26,7 +26,7 @@ export default Ember.Component.extend({
 
     this.set('countdown', null);
 
-    this.attrs.action();
+    this.get('attrs').action();
   }).on('mouseDown').restartable()
 
 });

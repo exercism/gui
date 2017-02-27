@@ -5,7 +5,7 @@ export default Ember.Component.extend({
   actions: {
     chooseTrack(track) {
       this.set('selectedTrack', track);
-      this.attrs.action(track);
+      this.get('attrs').action(track);
     }
   }
 });

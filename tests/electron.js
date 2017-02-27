@@ -1,6 +1,7 @@
 /* jshint undef: false */
 
-const {BrowserWindow, app} = require('electron');
+const BrowserWindow = require('electron').BrowserWindow;
+const app = require('electron').app;
 
 let mainWindow = null;
 
@@ -13,7 +14,8 @@ app.on('window-all-closed', function onWindowAllClosed() {
 app.on('ready', function onReady() {
     mainWindow = new BrowserWindow({
         width: 800,
-        height: 600
+        height: 600,
+        backgroundThrottling: false
     });
 
     delete mainWindow.module;

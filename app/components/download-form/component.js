@@ -4,18 +4,16 @@ import { validator, buildValidations } from 'ember-cp-validations';
 let Validations = buildValidations({
   uuid: validator('presence', {
     presence: true,
-    dependentKeys: ['validationsDisabled'],
-    disabled(model) {
-      return model.get('validationsDisabled');
-    }
+    dependentKeys: ['model.validationsDisabled'],
+    disabled: Ember.computed.not('model.validationsEnabled')
   }),
 });
 
 export default Ember.Component.extend(Validations, {
-  validationsDisabled: true,
+  validationsEnabled: false,
   actions: {
     download() {
-      this.set('validationsDisabled', false);
+      this.set('validationsEnabled', true);
       if (this.get('validations.isValid')) {
         this.get('download')(this.get('uuid'));
       }

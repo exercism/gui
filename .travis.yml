@@ -28,7 +28,7 @@ addons:
 
 before_install:
 - npm config set spin false
-- npm install -g bower
+- npm install -g bower yarn
 
 install:
 - yarn install

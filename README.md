@@ -1,4 +1,4 @@
-[![Stories in Ready](https://badge.waffle.io/exercism/gui.png?label=ready&title=Ready)](https://waffle.io/exercism/gui)
+[![Stories in Ready](https://badge.waffle.io/exercism/gui.svg?label=ready&title=Ready)](https://waffle.io/exercism/gui)
 [![Windows Build status](https://ci.appveyor.com/api/projects/status/m7djinnk5hcyivab?svg=true)](https://ci.appveyor.com/project/holandes22/exercism-gui)
 [![Linux/Mac Build Status](https://travis-ci.org/exercism/gui.svg?branch=master)](https://travis-ci.org/exercism/gui)
 [![Dependency Status](https://david-dm.org/exercism/gui.svg)](https://david-dm.org/exercism/gui)

@@ -1,4 +1,4 @@
-/* jshint undef: false */
+/* eslint-disable no-undef */
 
 const BrowserWindow = require('electron').BrowserWindow;
 const app = require('electron').app;
@@ -31,4 +31,4 @@ app.on('ready', function onReady() {
     });
 });
 
-/* jshint undef: true */
+/* eslint-enable */

@@ -2,8 +2,7 @@ import { moduleFor, test } from 'ember-qunit';
 import td from 'testdouble';
 
 moduleFor('route:configuration', 'Unit | Route | configuration', {
-  // Specify the other units that are required for this test.
-  // needs: ['controller:foo']
+  needs: ['service:notifier', 'service:exercism', 'service:configuration']
 });
 
 test('it bubbles if error when reading file', function(assert) {

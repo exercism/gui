@@ -1,8 +1,7 @@
 import { moduleFor, test } from 'ember-qunit';
 
 moduleFor('route:download', 'Unit | Route | download', {
-  // Specify the other units that are required for this test.
-  // needs: ['controller:foo']
+  //needs: ['service:exercism']
 });
 
 test('it exists', function(assert) {

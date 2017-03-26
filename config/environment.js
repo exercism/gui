@@ -1,4 +1,4 @@
-/* jshint node: true */
+/* eslint-env node: true */
 module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'exercism-gui',

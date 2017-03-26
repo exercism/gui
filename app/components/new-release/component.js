@@ -21,6 +21,7 @@ export default Ember.Component.extend({
     }
 
     return lodash.find(assets, (asset) => {
+      // eslint-disable-next-line no-unused-vars
       let [_n0, _n1, pkgPlatform, pkgArch, ...rest] = asset.name.split('-'); // jshint ignore:line
 
       if (platform === pkgPlatform && pkgArch === arch) {

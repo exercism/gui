@@ -5,6 +5,7 @@ let fs = requireNode('fs'),
     mockFs = requireNode('mock-fs');
 
 moduleFor('service:exercism', 'Unit | Service | exercism', {
+  needs: ['service:ajax', 'service:configuration'],
   afterEach() {
     mockFs.restore();
   }
@@ -167,8 +168,7 @@ test('extracts details from path with nested folders', function(assert) {
   assert.equal(language, 'elixir');
 });
 
-// /home/pablo/exercism/solutions/holandes22/elixir/acronym/1758fa0ec480443c86b0f5740da83b4d
-// /home/pablo/exercism/solutions/<username>/<trackId>/<slug>/<uuid>
+// /home/<user>/exercism/solutions/<username>/<trackId>/<slug>/<uuid>
 
 test('downloaded submitted solutions are saved in the correspondent dir', function(assert) {
   let service = this.subject();

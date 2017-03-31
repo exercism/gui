@@ -22,7 +22,7 @@
     "active-model-adapter": "2.1.1",
     "broccoli-asset-rev": "^2.4.5",
     "devtron": "^1.4.0",
-    "electron": "^1.4.15",
+    "electron": "1.4.15",
     "electron-packager": "^8.5.2",
     "electron-rebuild": "^1.5.7",
     "ember-ajax": "^2.4.1",

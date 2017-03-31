@@ -26,13 +26,24 @@ test('it shows message when no files available', function(assert) {
   assert.equal(this.$(testSelector('no-files-msg')).text().trim(), 'None');
 });
 
-test('it disables submit button if no selection', function(assert) {
+test('it disables submit and open buttons if no selection', function(assert) {
   let problem = { files: ['f1'] };
   this.set('problem', problem);
 
   this.render(hbs`{{file-selector problem=problem}}`);
   assert.equal(this.$(testSelector('files')).length, 1);
   assert.ok(this.$(testSelector('submit-btn')).hasClass('disabled'));
+  assert.ok(this.$(testSelector('open-btn')).hasClass('disabled'));
+});
+
+test('it enables submit and open buttons if selection', function(assert) {
+  let problem = { files: ['f1'] };
+  this.set('problem', problem);
+  this.set('selectedFile', 'f1');
+
+  this.render(hbs`{{file-selector problem=problem selectedFile=selectedFile}}`);
+  assert.notOk(this.$(testSelector('submit-btn')).hasClass('disabled'));
+  assert.notOk(this.$(testSelector('open-btn')).hasClass('disabled'));
 });
 
 test('it shows error message if file no longer exists', function(assert) {

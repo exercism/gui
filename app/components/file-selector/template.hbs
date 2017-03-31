@@ -3,11 +3,11 @@
   <div class="sub header">note that README.md, test files and nested folders are skipped from this list</div>
 </h5>
 {{#if problem.files}}
-<div class="ui large form">
+<div class="ui form">
   <div class="grouped inline fields">
     {{#each problem.files as |file|}}
     <div class="field" data-test-files>
-      {{ui-radio name="selectedFile" value=file label=file current=selectedFile}}
+      {{ui-radio name="selectedFile" value=file label=file current=selectedFile onChange=(action (mut selectedFile))}}
     </div>
     {{/each}}
   </div>
@@ -27,6 +27,7 @@
       Submit
   </button>
   <button
+    data-test-open-btn
     class="ui secondary basic button {{if (not selectedFile) 'disabled'}}"
     {{action "open"}}>
       Open

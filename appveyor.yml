@@ -10,7 +10,7 @@ platform:
   - x64
 
 cache:
-  - node_modules --> package.json
+  - node_modules -> package.json
   - bower_components -> bower.json
 
 install:

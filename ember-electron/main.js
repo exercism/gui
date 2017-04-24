@@ -35,6 +35,7 @@ app.on('ready', () => {
       minHeight: 768,
       width: 1024,
       height: 768,
+      icon: join(__dirname, 'resources', 'icons', 'linux.png')
     });
 
 

@@ -26,9 +26,9 @@ addons:
     - clang
     - xvfb
 
-# before_install:
+before_install:
 # - npm config set spin false
-# - npm install -g bower yarn@0.23.2
+- npm install -g bower yarn@0.23.2
 
 install:
 - yarn install

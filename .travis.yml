@@ -45,7 +45,7 @@ after_success:
 - if [ -z "$TRAVIS_TAG" ]; then echo "Done!"; exit 0; fi
 - export ARTIFACT_NAME=exercism-gui-$ELECTRON_PLATFORM-x64
 # Icon is set as a BrowserWindow option for Linux, so the icon option is only valid for Mac and disregarded for Linux
-- ember electron:package --platform $ELECTRON_PLATFORM --arch x64 --icon public/assets/icons/darwin.icns
+- ember electron:package --platform $ELECTRON_PLATFORM --arch x64 --icon public/assets/icons/darwin.icns --environment production
 - tar -C electron-out -czvf electron-out/$ARTIFACT_NAME-$TRAVIS_TAG.tar.gz $ARTIFACT_NAME
 - ls -lah electron-out
 

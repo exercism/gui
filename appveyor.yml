@@ -22,7 +22,7 @@ install:
 build_script:
   - node --version
   - IF %PLATFORM% EQU x64 (SET package_arch=x64) ELSE (SET package_arch=ia32)
-  - node node_modules\ember-cli\bin\ember electron:package --platform win32 --arch %package_arch% --icon public/assets/icons/win32.ico
+  - node node_modules\ember-cli\bin\ember electron:package --platform win32 --arch %package_arch% --icon public/assets/icons/win32.ico --environment production
 
 after_build:
   - cd electron-out

@@ -46,8 +46,8 @@ after_success:
 - export ARTIFACT_NAME=exercism-gui-$ELECTRON_PLATFORM-x64
 # Icon is set as a BrowserWindow option for Linux, so the icon option is only valid for Mac and disregarded for Linux
 - ember electron:package --platform $ELECTRON_PLATFORM --arch x64 --icon public/assets/icons/darwin.icns
-- tar -C electron-builds -czvf electron-builds/$ARTIFACT_NAME-$TRAVIS_TAG.tar.gz $ARTIFACT_NAME
-- ls -lah electron-builds
+- tar -C electron-out -czvf electron-out/$ARTIFACT_NAME-$TRAVIS_TAG.tar.gz $ARTIFACT_NAME
+- ls -lah electron-out
 
 deploy:
   provider: releases
@@ -55,7 +55,7 @@ deploy:
   api_key:
     secure: iay/2iEavXrbHvw+S3KgMxv7zjiBlS81pxFgFjbxVQa4SMXlkpkwgn3DyBai1erlTs9PBJBVtQ9q8ByYmq9IMqeiNSaBRGrhy1iYxLfJYyp717NTRZQ74X5hVYv8AvZNt6ny+cSd1loF6L9tiHFkm1BqsIs0r/Q05MQLWIvyvNMLvy8s5flttO6KWnsNIYJ0sKN6nYgLgZEGyF6xyeux0CaDC0qoww1Okl4uSP/7w0MZDTBSKhQWl6NzRbvZyyCI+DpGnx413lMEJ+Pe2a8nCEzSgZALecxMWS+TK9AVJ/hm4Tr1dDuzbBFkVIyrKpGDzKNCXrczSvS012tbjQJT/cry0usEsAe6Ncvxeh1jKI8VxWX70gap4IkNbc7rlpu1f+8ao77mE72ing1E4N6rBQxoGDQ8hJH4gtyT9fUPAwnVmVnlavdATdr4kfd5cOvP0VRM0hzLNMW6V8KmK7MRQp3IfEaPFbtUgqWp6HgWsuhB5H8TurbknhgAOC1H9RK9Gtzx1HavCliE0yhAtRmEVAy58oJABMgbzaafK3QKUgyCUpbBE8SYIU+R9D/Z8o9fTk7vpFTrBV9q3edK7s9hvFU9Rky6K7Tqk8LI28PmSbq/RRS3y0or2TbcGEzbEElkv4EwVnXzByeFE4Vc4urwBgJGEaVpQtd07oG1WIRVB/Q=
   file_glob: true
-  file: electron-builds/*.tar.gz
+  file: electron-out/*.tar.gz
   on:
     tags: true
     repo: exercism/gui

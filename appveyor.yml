@@ -15,7 +15,7 @@ cache:
 
 install:
   - ps: Install-Product node 6 $env:PLATFORM
-  - npm install bower -g
+  - npm install bower -g yarn@0.23.2
   - yarn install
   - bower install
 

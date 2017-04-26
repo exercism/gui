@@ -45,7 +45,7 @@ app.on('ready', () => {
 
     // delete mainWindow.module;
 
-    const emberAppLocation = 'serve://dist';
+    const emberAppLocation = `file://${__dirname}/../ember/index.html`;
 
     // If you want to open up dev tools programmatically, call
     // mainWindow.openDevTools();

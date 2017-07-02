@@ -29,9 +29,12 @@ export default Ember.Service.extend({
     this.set('arch', os.arch());
     this.set('platform', os.platform());
     this.set('homeDir', osHomedir());
-    this.set('homeExercisesDir', this.get('configuration').getHomeExercisesDir());
     this.set('configFilePath', this.get('configuration').getHomeConfigFilePath());
   },
+
+  homeExercisesDir: Ember.computed('configuration.dir', function() {
+    return this.get('configuration.dir');
+  }),
 
   getLatestRelease() {
     let url = 'https://api.github.com/repos/exercism/gui/releases/latest';

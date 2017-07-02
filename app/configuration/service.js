@@ -22,12 +22,16 @@ export default Ember.Service.extend({
     return path.join(osHomedir(), 'exercism');
   },
 
+  getDefaultHomeExercisesDir() {
+    return path.join(osHomedir(), 'exercism')
+  },
+
   getDefaults() {
     return {
       api: 'http://exercism.io',
       xapi: 'http://x.exercism.io',
       apiKey: null,
-      dir: this.getHomeExercisesDir(),
+      dir: this.getDefaultHomeExercisesDir()
     };
   },
 

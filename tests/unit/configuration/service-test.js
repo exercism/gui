@@ -26,8 +26,8 @@ test('it returns defaults if config file does not exists', function(assert) {
         apiKey: null,
         dir: '/home/fake/exercises',
       };
-  service.getHomeExercisesDir = td.function();
-  td.when(service.getHomeExercisesDir()).thenReturn(expected.dir);
+  service.getDefaultHomeExercisesDir = td.function();
+  td.when(service.getDefaultHomeExercisesDir()).thenReturn(expected.dir);
   assert.deepEqual(service.readConfigFile(), expected);
 });
 

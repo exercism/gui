@@ -34,7 +34,7 @@ To start the app, go to the extracted folder and double click on the **exercism-
 
 Until an installer is available, upgrading is a manual process. To "upgrade" simply download the new package and extract over the old files.
 Or extract to a new folder and remove the old version.
-Removing the old folder is completely safe as no user information is stored in it (unless you explicitely configure the `exercism` folder to be
+Removing the old folder is completely safe as no user information is stored in it (unless you explicitly configure the `exercism` folder to be
 under it, which is *not* recommended)
 
 ## Remove
